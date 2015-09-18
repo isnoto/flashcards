@@ -1,0 +1,9 @@
+<% @cards.each do |cards| %>
+  <ul class="cards">
+    <li class="cards__item">
+      <div class="cards__text">Оригинал: <%= cards.original_text %></div>
+      <div class="cards__text">Перевод: <%=cards.translated_text%></div>
+      <div class="cards__text"><%=cards.review_date.strftime("%d/%m/%Y") %></div>
+    </li>
+  </ul>
+<% end %>
