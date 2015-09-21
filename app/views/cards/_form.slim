@@ -1,0 +1,4 @@
+= simple_form_for(card) do |f|
+  = f.input :original_text,   input_html: { class: 'form-control' }
+  = f.input :translated_text, input_html: { class: 'form-control' }
+  = f.submit 'Создать', class: 'btn btn-default cards__input-submit'
