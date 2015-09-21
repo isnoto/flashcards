@@ -1,10 +1,8 @@
 class CardsController < ApplicationController
+  before_action :find_card, only: [:edit, :update, :destroy]
+
   def index
     @cards = Card.all
-  end
-
-  def show
-    @card = find_card
   end
 
   def new
@@ -12,8 +10,6 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = find_card
-    render :show
   end
 
   def create
@@ -27,8 +23,6 @@ class CardsController < ApplicationController
   end
 
   def update
-    @card = find_card
-
     if @card.update(card_params)
       redirect_to card_path
     else
@@ -37,7 +31,6 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @card = find_card
     @card.destroy
     redirect_to cards_path
   end
@@ -49,6 +42,6 @@ class CardsController < ApplicationController
   end
 
   def find_card
-    Card.find(params[:id])
+    @card = Card.find(params[:id])
   end
 end
