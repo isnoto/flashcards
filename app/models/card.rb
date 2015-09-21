@@ -1,8 +1,7 @@
 class Card < ActiveRecord::Base
   after_validation :validate_text, :add_review_date, if: :new_record?
   validates :original_text, :translated_text, presence: true
-
-
+  
   private
 
   def validate_text
