@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'nokogiri'
+require 'open-uri'
+
+source = "http://www.languagedaily.com/learn-german/vocabulary/common-german-words"
+doc = Nokogiri::HTML(open(source))
+
+
+words = doc.css("tbody tr")[1..-1]
+words.each do |word|
+  Card.create(original_text: word.children[3].text, translated_text: word.children[5].text)
+end
