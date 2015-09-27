@@ -10,7 +10,6 @@ class CardsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit

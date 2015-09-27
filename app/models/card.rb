@@ -3,7 +3,8 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :add_review_date, presence: true
   validate :words_cannot_be_equal
 
-  scope :random_for_review, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
+  scope :random_for_review, -> { where('review_date <= ?', Time.now)
+                                   .order('RANDOM()') }
 
   def check_user_answer(answer)
     result = answer == original_text
