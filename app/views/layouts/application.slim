@@ -10,7 +10,7 @@ body
 section#container
 
   header.clearfix
-    h1 Флэшкарточкер
+    h1 = link_to 'Флэшкарточкер', '/'
     ul.navigation-links
       li
         = link_to 'Все карточки', cards_path
@@ -18,4 +18,6 @@ section#container
         = link_to 'Добавить карточку', new_card_path
 
   section
+    = flash[:success]
+    = flash[:wrong_answer]
     = yield
