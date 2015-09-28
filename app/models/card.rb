@@ -3,11 +3,11 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :add_review_date, presence: true
   validate :words_cannot_be_equal
 
-  scope :random_for_review, -> { where('review_date <= ?', Time.now)
-                                   .order('RANDOM()') }
+  scope :condition,         -> { where('review_date >= ?', Time.now) }
+  scope :random_for_review, -> { offset(rand(condition.count)) }
 
   def check_user_answer(answer)
-    result = answer == original_text
+    result = prepare_word(answer) == prepare_word(original_text)
 
     update_attributes(review_date: add_review_date) if result
   end
