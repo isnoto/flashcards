@@ -1,0 +1,6 @@
+= form_tag reviews_path do
+  div = card.translated_text
+  = hidden_field_tag 'card_id', card.id
+  = label_tag(:answer, 'Введите перевод')
+  = text_field_tag(:answer)
+  = submit_tag('Подтвердить')

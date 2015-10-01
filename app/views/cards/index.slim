@@ -2,7 +2,7 @@
     ul class="cards clearfix"
       li class="cards__item"
         div Оригинал: #{card.original_text}
-        div Перевод: #{card.translated_text}
+        div Перевод:  #{card.translated_text}
         div = card.review_date.strftime("%d/%m/%Y")
         span = link_to 'Редактировать', edit_card_path(card)
         span = link_to 'Удалить', card_path(card),
