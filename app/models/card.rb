@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   scope :condition,         -> { where('review_date <= ?', Time.now) }
   scope :random_for_review, -> { offset(rand(condition.count)) }
 
-  def check_user(answer)
+  def check_answer(answer)
     result = prepare_word(answer) == prepare_word(original_text)
 
     update_attributes(review_date: add_review_date) if result
