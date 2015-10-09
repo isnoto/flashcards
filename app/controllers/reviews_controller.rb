@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   def create
     @card = Card.find(review_params[:card_id])
 
-    if @card.check_user(review_params[:answer])
+    if @card.check_answer(review_params[:answer])
       flash[:success] = 'Верно!'
       redirect_to root_path
     else

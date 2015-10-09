@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
   before_validation :add_review_date, if: :new_record?
-  validates :original_text, :translated_text, :add_review_date, presence: true
+  validates :original_text, :translated_text, :review_date, presence: true
   validate :words_cannot_be_equal
 
   scope :condition,         -> { where('review_date <= ?', Time.now) }
