@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   validate :words_cannot_be_equal
 
   scope :condition,         -> { where('review_date <= ?', Time.now) }
-  scope :random_for_review, -> { offset(rand(condition.count)) }
+  scope :random_for_review, -> { condition.offset(rand(condition.count)) }
 
   def check_answer(answer)
     result = prepare_word(answer) == prepare_word(original_text)
