@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 describe 'Reviewing card' do
-  subject! { create(:card) }
+  let!(:user) { create(:user) }
 
   context 'When there are cards for review' do
+    subject! { create(:card, user_id: user.id) }
+
     before do
       subject.update_attributes(review_date: Date.today - 2.days)
     end

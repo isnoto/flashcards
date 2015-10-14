@@ -1,10 +1,13 @@
 class Card < ActiveRecord::Base
+  belongs_to :user
+
   before_validation :add_review_date, if: :new_record?
-  validates :original_text, :translated_text, :review_date, presence: true
+  validates :original_text, :translated_text, :review_date, :user_id,
+            presence: true
   validate :words_cannot_be_equal
 
   scope :condition,         -> { where('review_date <= ?', Time.now) }
-  scope :random_for_review, -> { offset(rand(condition.count)) }
+  scope :random_for_review, -> { condition.offset(rand(condition.count)) }
 
   def check_answer(answer)
     result = prepare_word(answer) == prepare_word(original_text)
