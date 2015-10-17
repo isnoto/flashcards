@@ -26,7 +26,7 @@ describe Card do
   describe '#check_answer' do
     let(:answer) { 'Привет' }
 
-    it 'user answer equal original text' do
+    it 'users answer equal original text' do
       expect(answer).to eq(card.original_text)
     end
   end
