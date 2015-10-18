@@ -8,8 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(params[:user][:email], params[:user][:password])
-      flash[:success] = 'Welcome!'
-      redirect_to root_path
+      redirect_to root_path, notice: 'Добро пожаловать!'
     else
       render 'new'
     end

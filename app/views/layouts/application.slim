@@ -16,8 +16,14 @@ html
             = link_to 'Все карточки', cards_path
           li
             = link_to 'Добавить карточку', new_card_path
+          li
+            = link_to 'Регистрация', sign_up_path
+          li
+            = link_to 'Войти', log_in_path
+          li
+            = link_to 'Выйти', log_out_path, method: :delete
 
       section
-        = flash[:success]
-        = flash[:wrong_answer]
+        - if flash.any?
+          = render 'shared/flash'
         = yield
