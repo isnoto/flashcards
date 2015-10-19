@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'reviews#show'
   resources :reviews,       only: [:show, :create]
   resources :cards
-  resources :users,         only: [:new, :create]
+  resources :users,         only: [:new, :create, :edit, :update]
   resources :user_sessions, only: [:new, :create, :destroy]
 
   get '/sign_up', to: 'users#new', as: 'sign_up'

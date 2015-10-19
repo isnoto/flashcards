@@ -12,16 +12,24 @@ html
       header.clearfix
         h1 = link_to 'Флэшкарточкер', '/'
         ul.navigation-links
-          li
-            = link_to 'Все карточки', cards_path
-          li
-            = link_to 'Добавить карточку', new_card_path
-          li
-            = link_to 'Регистрация', sign_up_path
-          li
-            = link_to 'Войти', log_in_path
-          li
-            = link_to 'Выйти', log_out_path, method: :delete
+          - if current_user
+            li
+              = link_to 'Все карточки', cards_path
+            li
+              = link_to 'Добавить карточку', new_card_path
+
+            ul class='pull-right'
+              li
+                = link_to current_user.name, edit_user_path(current_user)
+              li
+                = link_to 'Выйти', log_out_path, method: :delete
+
+          - else
+            li
+              = link_to 'Регистрация', sign_up_path
+            li
+              = link_to 'Войти', log_in_path
+
 
       section
         - if flash.any?

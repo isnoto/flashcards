@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
+  before_action :require_login
+
   def show
-    @card = Card.random_for_review.first
+    @card = current_user.cards.random_for_review.first
   end
 
   def create
@@ -19,5 +21,10 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.permit(:card_id, :answer)
+  end
+
+  def not_authenticated
+    flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
+    redirect_to log_in_path
   end
 end
