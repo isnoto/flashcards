@@ -18,6 +18,7 @@ gem 'sorcery'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :test do

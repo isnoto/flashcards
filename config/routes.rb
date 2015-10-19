@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   root 'reviews#show'
+
   resources :reviews,       only: [:show, :create]
   resources :cards
   resources :users,         only: [:new, :create, :edit, :update]
-  resources :user_sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
 
   get '/sign_up', to: 'users#new', as: 'sign_up'
-  get '/log_in', to: 'user_sessions#new', as: :log_in
-  delete '/log_out', to: 'user_sessions#destroy', as: :log_out
+  get '/log_in', to: 'sessions#new', as: :log_in
+  delete '/log_out', to: 'sessions#destroy', as: :log_out
+
+  post 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/:provider', to: 'oauths#oauth', :as => :auth_at_provider
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
