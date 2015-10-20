@@ -21,15 +21,16 @@ class CardsController < ApplicationController
     @card = current_user.cards.build(card_params)
 
     if @card.save
-      redirect_to cards_path
+      redirect_to cards_path, notice: 'Карточка создана'
     else
+      flash.now[:alert] = 'Заполните все поля!'
       render :new
     end
   end
 
   def update
     if @card.update(card_params)
-      redirect_to card_path
+      redirect_to cards_path, notice: 'Карточка успешно отредактирована!'
     else
       render :edit
     end
