@@ -14,6 +14,8 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'nokogiri'
 gem 'sorcery'
+gem 'rmagick'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug'
