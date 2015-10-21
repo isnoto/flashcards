@@ -13,10 +13,12 @@ gem 'pg', '~> 0.18.3'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'nokogiri'
+gem 'sorcery'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :test do

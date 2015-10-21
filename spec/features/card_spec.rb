@@ -3,6 +3,10 @@ require 'rails_helper'
 describe 'Reviewing card' do
   let!(:user) { create(:user) }
 
+  before do
+    login(user.email)
+  end
+
   context 'When there are cards for review' do
     subject! { create(:card, user_id: user.id) }
 
@@ -31,6 +35,13 @@ describe 'Reviewing card' do
         click_button 'Подтвердить'
         expect(page).to have_content('Ваш ответ не правильный')
       end
+    end
+  end
+
+  context 'When there are not card for review' do
+    it 'shows message "All cards reviewed"' do
+      visit root_path
+      expect(page).to have_content('Все карточки пересмотрены')
     end
   end
 end

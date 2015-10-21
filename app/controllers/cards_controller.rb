@@ -1,8 +1,10 @@
 class CardsController < ApplicationController
+  before_action :require_login
   before_action :find_card, only: [:edit, :update, :destroy]
 
+
   def index
-    @cards = Card.all
+    @cards = current_user.cards
   end
 
   def new
@@ -16,18 +18,19 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = current_user.cards.build(card_params)
 
     if @card.save
-      redirect_to cards_path
+      redirect_to cards_path, notice: 'Карточка создана'
     else
+      flash.now[:alert] = 'Заполните все поля!'
       render :new
     end
   end
 
   def update
     if @card.update(card_params)
-      redirect_to card_path
+      redirect_to cards_path, notice: 'Карточка успешно отредактирована!'
     else
       render :edit
     end
@@ -46,5 +49,10 @@ class CardsController < ApplicationController
 
   def find_card
     @card = Card.find(params[:id])
+  end
+
+  def not_authenticated
+    flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
+    redirect_to log_in_path
   end
 end
