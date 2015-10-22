@@ -16,6 +16,7 @@ gem 'nokogiri'
 gem 'sorcery'
 gem 'rmagick'
 gem 'carrierwave'
+gem 'fog', require: 'fog/aws'
 
 group :development, :test do
   gem 'byebug'
