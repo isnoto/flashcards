@@ -1,6 +1,8 @@
 class Card < ActiveRecord::Base
   belongs_to :user
 
+  mount_uploader :image, ImageUploader
+
   before_validation :add_review_date, if: :new_record?
   validates :original_text, :translated_text, :review_date, :user_id,
             presence: true

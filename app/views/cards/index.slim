@@ -1,6 +1,7 @@
 - @cards.each do |card|
     ul class="cards clearfix"
       li class="cards__item"
+        div = image_tag card.image.thumb
         div Оригинал: #{card.original_text}
         div Перевод:  #{card.translated_text}
         div Дата пересмотра: #{card.review_date.strftime("%d/%m/%Y")}
