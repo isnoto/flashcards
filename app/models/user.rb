@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :cards, dependent: :destroy
+  has_many :cards, through: :decks, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :decks
 
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
