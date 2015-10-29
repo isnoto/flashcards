@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :reviews,       only: [:show, :create]
   resources :cards
+  resources :decks
   resources :registrations, only: [:new, :create]
   resources :profile,       only: [:edit, :update]
   resources :sessions,      only: [:new, :create, :destroy]

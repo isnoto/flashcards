@@ -2,7 +2,6 @@ class CardsController < ApplicationController
   before_action :require_login
   before_action :find_card, only: [:edit, :update, :destroy]
 
-
   def index
     @cards = current_user.cards
   end

@@ -1,0 +1,11 @@
+div = link_to 'Добавить колоду', new_deck_path
+
+- @decks.each do |deck|
+  ul class = "decks clearfix"
+    li class = "decks__item"
+      div
+        div = deck.name
+        span = link_to 'Посмотреть карточки', deck_path(deck)
+        span = link_to 'Редактировать', edit_deck_path(deck)
+        span = link_to 'Удалить', deck_path(deck),
+                       method: :delete
