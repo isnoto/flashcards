@@ -7,6 +7,7 @@ div = link_to 'Добавить карточку', new_card_path
         div Оригинал: #{card.original_text}
         div Перевод:  #{card.translated_text}
         div Дата пересмотра: #{card.review_date.strftime("%d/%m/%Y")}
+        div = card.deck.name
         span = link_to 'Редактировать', edit_card_path(card)
         span = link_to 'Удалить', card_path(card),
                        method: :delete
