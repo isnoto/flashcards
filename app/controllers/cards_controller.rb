@@ -18,7 +18,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = @deck.cards.build(card_params)
+    @card = Card.new(card_params)
     
     if @card.save
       redirect_to cards_path, notice: 'Карточка создана'

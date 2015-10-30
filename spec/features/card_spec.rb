@@ -8,7 +8,8 @@ describe 'Reviewing card' do
   end
 
   context 'When there are cards for review' do
-    subject! { create(:card, user_id: user.id) }
+    let!(:deck) { create(:deck, user_id: user.id) }
+    subject! { create(:card, deck_id: deck.id) }
 
     before do
       subject.update_attributes(review_date: Date.today - 2.days)

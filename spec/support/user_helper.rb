@@ -5,10 +5,20 @@ def login(email)
   click_button 'Log In'
 end
 
-def create_card
-  click_link 'Добавить карточку'
+def card_fill_in
   fill_in :card_original_text, with: 'Hello'
   fill_in :card_translated_text, with: 'Привет'
+end
+
+def visit_create_card_path
+  click_link 'Все карточки'
+  click_link 'Добавить карточку'
+end
+
+def create_card
+  visit_create_card_path
+  card_fill_in
+  select deck.name, from: 'Deck'
   click_button 'Создать'
 end
 

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'User authorization' do
   let!(:user) { create(:user) }
+  let!(:deck) { create(:deck, user_id: user.id) }
 
   context 'Accessing page' do
     context 'when user log in' do
@@ -12,35 +13,45 @@ describe 'User authorization' do
         expect(page).to have_content(user.name)
       end
 
-      it 'allows create cards' do
-        create_card
+      it 'allows to create cards in deck' do
+        visit_create_card_path
+        card_fill_in
+        select deck.name, from: 'Deck'
+        click_button 'Создать'
         expect(page).to have_content('Карточка создана')
       end
 
       it 'not allows create empty cards' do
-        click_link 'Добавить карточку'
+        visit_create_card_path
         click_button 'Создать'
         expect(page).to have_content('Заполните все поля!')
       end
 
       it 'allows edit cards' do
         create_card
-        visit cards_path
         click_link 'Редактировать'
         fill_in :card_original_text, with: 'Another word'
         click_button 'Создать'
         expect(page).to have_content('Карточка успешно отредактирована!')
       end
 
-      it 'allows edit profile' do
+      it 'allows to edit profile' do
         click_link user.name
-        expect(page).to have_button('Обновить')
+        fill_in :user_name, with: 'qwerty'
+        fill_in :user_password, with: 123456
+        fill_in :user_password_confirmation, with: 123456
+        click_button 'Обновить'
+        expect(page).to have_content('Данные обновлены')
       end
 
-      let(:another_user) { create :user, name: 'another_name', email: 'another_email@gmail.com' }
+      let(:another_user) do create :user, name: 'another_name',
+                                  email: 'another_email@gmail.com'
+      end
+
+      let(:another_deck) { create(:deck, user_id: another_user.id) }
 
       it 'grants access only to user\'s cards' do
-        card = another_user.cards.push(build(:card))
+        card = another_deck.cards.push(build(:card))
 
         expect {
           visit edit_card_path(card)
