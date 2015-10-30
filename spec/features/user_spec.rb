@@ -80,4 +80,19 @@ describe 'Authentication' do
     register_user
     expect(page).to have_content('Добро пожаловать!')
   end
+
+  it 'not allows to create user with wrong data' do
+    visit sign_up_path
+    click_button 'Регистрация'
+    expect(page).to have_content('Заполните все поля!')
+  end
+
+  it 'not allows to create user with already existing name or email' do
+    visit sign_up_path
+    register_user
+    click_link 'Выйти'
+    visit sign_up_path
+    register_user
+    expect(page).to have_content('has already been taken')
+  end
 end

@@ -10,6 +10,7 @@ class RegistrationsController < ApplicationController
       login(params[:user][:email], params[:user][:password])
       redirect_to root_path, notice: 'Добро пожаловать!'
     else
+      flash.now[:alert] = 'Заполните все поля!'
       render 'new'
     end
   end
