@@ -5,7 +5,10 @@ div = link_to 'Добавить колоду', new_deck_path
     li class = "decks__item"
       div
         div = deck.name
+        - if current_user.current_deck_id == deck.id
+          div Текущая
         span = link_to 'Посмотреть карточки', deck_path(deck)
         span = link_to 'Редактировать', edit_deck_path(deck)
         span = link_to 'Удалить', deck_path(deck),
                        method: :delete
+        span = link_to 'Сделать текущей', deck_set_current_deck_path(deck), method: :post

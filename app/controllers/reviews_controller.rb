@@ -2,7 +2,11 @@ class ReviewsController < ApplicationController
   before_action :require_login
 
   def show
-    @card = current_user.cards.random_for_review.first
+    if current_user.current_deck_id
+      @card = find_current_deck.cards.random_for_review.first
+    else
+      @card = current_user.cards.random_for_review.first
+    end
   end
 
   def create
@@ -26,5 +30,9 @@ class ReviewsController < ApplicationController
   def not_authenticated
     flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
     redirect_to log_in_path
+  end
+
+  def find_current_deck
+    current_user.decks.find(current_user.current_deck_id)
   end
 end

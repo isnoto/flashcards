@@ -36,7 +36,16 @@ class DecksController < ApplicationController
   end
 
   def destroy
+    @deck.destroy
+    redirect_to decks_path
+  end
 
+  def set_current_deck
+    if current_user.update_attributes(current_deck_id: params[:deck_id])
+      redirect_to decks_path, notice: "Вы сделали карточку текущей"
+    else
+      redirect_to decks_path, alert: 'Ошибка'
+    end
   end
 
   private
@@ -49,4 +58,3 @@ class DecksController < ApplicationController
    @deck = Deck.find(params[:id])
   end
 end
-

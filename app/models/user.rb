@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
 
   validates :password,
             length: { minimum: 3 },
-            confirmation: true
-  validates :password_confirmation, presence: true
+            confirmation: true, if: :password
+  validates :password_confirmation, presence: true,
+            if: :password
   validates :email, :name,
             uniqueness: true,
             presence: true

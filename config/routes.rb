@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :reviews,       only: [:show, :create]
   resources :cards
-  resources :decks
+  resources :decks do
+    post 'set_current_deck', to: 'decks#set_current_deck'
+  end
   resources :registrations, only: [:new, :create]
   resources :profile,       only: [:edit, :update]
   resources :sessions,      only: [:new, :create, :destroy]
