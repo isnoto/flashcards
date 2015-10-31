@@ -36,13 +36,18 @@ class DecksController < ApplicationController
   end
 
   def destroy
+    if find_current_deck_id == @deck.id
+      current_user.update_attributes(current_deck_id: nil)
+    end
+
     @deck.destroy
     redirect_to decks_path
   end
 
   def set_current_deck
     if current_user.update_attributes(current_deck_id: params[:deck_id])
-      redirect_to decks_path, notice: "Вы сделали карточку текущей"
+      redirect_to decks_path, notice: "Вы сделали колоду #{ Deck.
+                              find(params[:deck_id]).name } текущей"
     else
       redirect_to decks_path, alert: 'Ошибка'
     end
@@ -56,5 +61,9 @@ class DecksController < ApplicationController
 
   def find_deck
    @deck = Deck.find(params[:id])
+  end
+
+  def find_current_deck_id
+    current_user.current_deck_id
   end
 end

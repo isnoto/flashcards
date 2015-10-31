@@ -1,3 +1,8 @@
+- if current_user.decks.empty?
+  div У вас пока нет колод.
+- elsif current_user.current_deck_id.nil?
+  div Нужно выбрать текущую колоду!
+
 div = link_to 'Добавить колоду', new_deck_path
 
 - @decks.each do |deck|
