@@ -52,7 +52,7 @@ class CardsController < ApplicationController
   end
 
   def find_deck
-    @deck = current_user.decks.find_by(id: params[:card][:deck_id])
+    @deck = current_user.decks.find_by(id: card_params[:deck_id])
   end
 
   def not_authenticated
