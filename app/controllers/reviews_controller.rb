@@ -2,11 +2,7 @@ class ReviewsController < ApplicationController
   before_action :require_login
 
   def show
-    if current_user.current_deck_id
-      @card = find_current_deck.cards.random_for_review.first
-    else
-      @card = current_user.cards.random_for_review.first
-    end
+    @card = Card.random_card(current_user.id)
   end
 
   def create

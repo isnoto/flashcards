@@ -20,6 +20,19 @@ class Card < ActiveRecord::Base
     update_attributes(review_date: add_review_date) if result
   end
 
+  def self.random_card(user_id)
+    user = User.find_by(id: user_id)
+
+    if user.current_deck_id
+      find_current_deck(user).cards.random_for_review.first
+    else
+      user.random_for_review.first
+    end
+  end
+
+  def self.find_current_deck(user)
+    user.decks.find(user.current_deck_id)
+  end
   private
 
   def prepare_word(word)
