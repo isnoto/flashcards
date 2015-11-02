@@ -36,7 +36,7 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    if find_current_deck_id == @deck.id
+    if @deck.current?
       current_user.update_attributes(current_deck_id: nil)
     end
 
