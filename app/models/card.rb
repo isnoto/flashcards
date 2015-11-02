@@ -26,7 +26,7 @@ class Card < ActiveRecord::Base
     if user.current_deck_id
       find_current_deck(user).cards.random_for_review.first
     else
-      user.random_for_review.first
+      user.cards.random_for_review.first
     end
   end
 
