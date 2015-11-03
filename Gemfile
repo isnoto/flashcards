@@ -17,6 +17,7 @@ gem 'sorcery'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'fog', require: 'fog/aws'
+gem 'select2-rails'
 
 group :development, :test do
   gem 'byebug'
@@ -33,4 +34,3 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-
