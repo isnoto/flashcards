@@ -13,20 +13,6 @@ describe 'User authorization' do
         expect(page).to have_content(user.name)
       end
 
-      it 'allows to create cards in deck' do
-        visit_create_card_path
-        card_fill_in
-        select deck.name, from: 'Deck'
-        click_button 'Создать'
-        expect(page).to have_content('Карточка создана')
-      end
-
-      it 'not allows create empty cards' do
-        visit_create_card_path
-        click_button 'Создать'
-        expect(page).to have_content('Заполните все поля!')
-      end
-
       it 'allows edit cards' do
         create_card
         click_link 'Редактировать'
@@ -74,7 +60,7 @@ describe 'User authorization' do
   end
 end
 
-describe 'Authentication' do
+describe 'User authentication' do
   it 'signs in after registration' do
     visit sign_up_path
     register_user

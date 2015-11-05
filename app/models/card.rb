@@ -7,7 +7,7 @@ class Card < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   before_validation :add_review_date, if: :new_record?
-  validates :original_text, :translated_text, :review_date, :deck_id,
+  validates :original_text, :translated_text, :review_date, :deck_name,
             presence: true
   validate :words_cannot_be_equal
 

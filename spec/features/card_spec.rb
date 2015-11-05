@@ -1,48 +1,35 @@
 require 'rails_helper'
 
-describe 'Reviewing card' do
+describe 'Managing cards', js: true do
   let!(:user) { create(:user) }
+  let!(:deck) { create(:deck, user_id: user.id) }
 
   before do
     login(user.email)
+    visit new_card_path
   end
 
-  context 'When there are cards for review' do
-    let!(:deck) { create(:deck, user_id: user.id) }
-    subject! { create(:card, deck_id: deck.id) }
-
-    before do
-      subject.update_attributes(review_date: Date.today - 2.days)
+  context 'When user try to create card' do
+    it 'not allows create empty cards' do
+      visit_create_card_path
+      click_button 'Создать'
+      expect(page).to have_content('Заполните все поля!')
     end
 
-    it 'card show on page' do
-      visit root_path
-      expect(page).to have_content(subject.translated_text)
+    it 'allows to create cards in deck' do
+      visit_create_card_path
+      card_fill_in
+      select deck.name, from: 'Deck'
+      click_button 'Создать'
+      expect(page).to have_content('Карточка создана')
     end
 
-    context 'and submit correct answer' do
-      it 'shows success message' do
-        visit root_path
-        fill_in :answer, with: subject.original_text
-        click_button 'Подтвердить'
-        expect(page).to have_content('Верно!')
-      end
-    end
-
-    context 'and submit wrong answer' do
-      it 'shows error message' do
-        visit root_path
-        fill_in :answer, with: 'wrong'
-        click_button 'Подтвердить'
-        expect(page).to have_content('Ваш ответ не правильный')
-      end
-    end
-  end
-
-  context 'When there are not card for review' do
-    it 'shows message "All cards reviewed"' do
-      visit root_path
-      expect(page).to have_content('Все карточки пересмотрены')
+    it 'allows to create a new deck along with a new card' do
+      visit new_card_path
+      card_fill_in
+      select2_fill_in ".card_deck_name", with: 'Test'
+      click_button 'Создать'
+      expect(page).to have_content('Карточка создана')
     end
   end
 end
