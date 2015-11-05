@@ -62,8 +62,4 @@ class DecksController < ApplicationController
   def find_deck
    @deck = Deck.find(params[:id])
   end
-
-  def find_current_deck_id
-    current_user.current_deck_id
-  end
 end

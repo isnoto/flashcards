@@ -33,6 +33,15 @@ class Card < ActiveRecord::Base
   def self.find_current_deck(user)
     user.decks.find(user.current_deck_id)
   end
+
+  def self.create_card_in_deck(user_id, params)
+    user = User.find_by(id: user_id)
+    deck = get_deck(params[:deck_name], user)
+
+    Card.new(original_text: params[:original_text],
+             translated_text: params[:translated_text], deck_id: deck.id)
+  end
+
   private
 
   def prepare_word(word)
@@ -48,5 +57,19 @@ class Card < ActiveRecord::Base
 
   def add_review_date
     self.review_date = Time.now + 3.days
+  end
+
+  def self.get_deck(deck_name, user)
+    deck = find_deck(deck_name)
+
+    if deck.nil?
+      Deck.create(name: deck_name, user_id: user.id)
+    else
+      deck
+    end
+  end
+
+  def self.find_deck(deck_name)
+    Deck.find_by(name: deck_name)
   end
 end

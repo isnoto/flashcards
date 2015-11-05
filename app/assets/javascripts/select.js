@@ -1,6 +1,15 @@
 $(document).ready(function() {
-  $("#card_deck_id").select2({
+  $("#card_deck_name").select2({
     theme: "bootstrap",
-    allowClear: true
+    width: '100%',
+    tags: true,
+    allowClear: true,
+    createTag: function (params) {
+      return {
+        id: params.term,
+        text: params.term,
+        newOption: true
+      }
+    }
   });
 });
