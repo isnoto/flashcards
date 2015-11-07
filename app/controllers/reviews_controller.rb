@@ -27,8 +27,4 @@ class ReviewsController < ApplicationController
     flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
     redirect_to log_in_path
   end
-
-  def find_current_deck
-    current_user.decks.find(current_user.current_deck_id)
-  end
 end

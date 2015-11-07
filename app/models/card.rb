@@ -7,8 +7,10 @@ class Card < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   before_validation :add_review_date, if: :new_record?
-  validates :original_text, :translated_text, :review_date, :deck_name,
+
+  validates :original_text, :translated_text, :review_date,
             presence: true
+  validates :deck_name, presence: true, if: :deck_name
   validate :words_cannot_be_equal
 
   scope :condition,         -> { where('review_date <= ?', Time.now) }
@@ -38,8 +40,7 @@ class Card < ActiveRecord::Base
     user = User.find_by(id: user_id)
     deck = get_deck(params[:deck_name], user)
 
-    Card.new(original_text: params[:original_text],
-             translated_text: params[:translated_text], deck_id: deck.id)
+    deck.cards.build(params)
   end
 
   private
