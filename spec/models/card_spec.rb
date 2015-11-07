@@ -30,6 +30,4 @@ describe Card do
       expect(answer).to eq(card.original_text)
     end
   end
-
-  context ''
 end
