@@ -23,18 +23,15 @@ class Card < ActiveRecord::Base
   end
 
   def self.random_card(user_id)
-    user = User.find_by(id: user_id)
+    user = User.find(user_id)
 
-    if user.current_deck_id
-      find_current_deck(user).cards.random_for_review.first
+    if user.current_deck
+      user.current_deck.cards.random_for_review.first
     else
-      user.cards.random_for_review.first
+      user.cards_for_review.first
     end
   end
 
-  def self.find_current_deck(user)
-    user.decks.find(user.current_deck_id)
-  end
 
   def self.create_card_in_deck(user_id, params)
     user = User.find_by(id: user_id)
@@ -61,16 +58,12 @@ class Card < ActiveRecord::Base
   end
 
   def self.get_deck(deck_name, user)
-    deck = find_deck(deck_name)
+    deck = Deck.find_by(name: deck_name)
 
     if deck.nil?
-      Deck.create(name: deck_name, user_id: user.id)
+      user.decks.create(name: deck_name)
     else
       deck
     end
-  end
-
-  def self.find_deck(deck_name)
-    Deck.find_by(name: deck_name)
   end
 end

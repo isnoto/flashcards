@@ -1,10 +1,12 @@
 div = link_to 'Добавить карточку', new_card_path
 
 ul class="cards clearfix"
+  - counter = 0
   - @cards.each do |card|
 
     li class="bs-callout bs-callout-primary"
       div class="cards__info-wrapper"
+        h4 Карточка # #{ counter += 1 }
         div = image_tag card.image.thumb
         div Оригинал: #{ card.original_text }
         div Перевод:  #{ card.translated_text }

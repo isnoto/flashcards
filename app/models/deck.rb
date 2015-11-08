@@ -5,8 +5,6 @@ class Deck < ActiveRecord::Base
   validates :name, presence: true
 
   def current?
-    current_deck = User.find_by(id: self.user_id).current_deck_id
-
-    self.id == current_deck
+    user.current_deck == self
   end
 end

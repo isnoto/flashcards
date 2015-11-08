@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   has_many :decks
 
+  belongs_to :current_deck, class_name: Deck
+
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
@@ -20,4 +22,8 @@ class User < ActiveRecord::Base
             uniqueness: true,
             presence: true
   validates :email, format: { with: EMAIL_REGEX }
+
+  def cards_for_review
+    cards.random_for_review
+  end
 end
