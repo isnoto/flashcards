@@ -60,6 +60,6 @@ class DecksController < ApplicationController
   def find_deck
     id = params[:deck_id] || params[:id]
 
-   @deck = Deck.find(id)
+    @deck = Deck.find(id)
   end
 end
