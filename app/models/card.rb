@@ -33,8 +33,7 @@ class Card < ActiveRecord::Base
   end
 
 
-  def self.create_card_in_deck(user_id, params)
-    user = User.find_by(id: user_id)
+  def self.create_card_in_deck(user, params)
     deck = get_deck(params[:deck_name], user)
 
     deck.cards.build(params)
@@ -58,7 +57,7 @@ class Card < ActiveRecord::Base
   end
 
   def self.get_deck(deck_name, user)
-    deck = Deck.find_by(name: deck_name)
+    deck = user.decks.find_by(name: deck_name)
 
     if deck.nil?
       user.decks.create(name: deck_name)
