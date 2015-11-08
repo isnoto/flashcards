@@ -1,0 +1,12 @@
+ul class="cards clearfix"
+  - @deck.cards.each do |card|
+    li class="bs-callout bs-callout-primary"
+      div class="cards__info-wrapper"
+        div = image_tag card.image.thumb
+        div Оригинал: #{ card.original_text }
+        div Перевод:  #{ card.translated_text }
+        div Дата пересмотра: #{ card.review_date.strftime("%d/%m/%Y") }
+
+      div class="btn-group"
+        = link_to 'Редактировать', edit_card_path(card), class: 'btn btn-success'
+        = link_to 'Удалить', card_path(card), method: :delete, class: 'btn btn-danger'

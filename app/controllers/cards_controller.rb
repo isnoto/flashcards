@@ -2,7 +2,6 @@ class CardsController < ApplicationController
   before_action :require_login
   before_action :find_card, only: [:edit, :update, :destroy]
 
-
   def index
     @cards = current_user.cards
   end
@@ -18,7 +17,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = current_user.cards.build(card_params)
+    @card = Card.create_card_in_deck(current_user, card_params)
 
     if @card.save
       redirect_to cards_path, notice: 'Карточка создана'
@@ -44,15 +43,10 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :image)
+    params.require(:card).permit(:original_text, :translated_text, :image, :deck_name)
   end
 
   def find_card
     @card = Card.find(params[:id])
-  end
-
-  def not_authenticated
-    flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
-    redirect_to log_in_path
   end
 end
