@@ -1,19 +1,26 @@
 - if current_user.decks.empty?
   div У вас пока нет колод.
 - elsif current_user.current_deck_id.nil?
-  div Нужно выбрать текущую колоду!
+  div class="flash flash-remind" Нужно выбрать текущую колоду!
 
 div = link_to 'Добавить колоду', new_deck_path
 
-- @decks.each do |deck|
-  ul class = "decks clearfix"
-    li class = "decks__item"
-      div
-        div = deck.name
-        - if current_user.current_deck_id == deck.id
-          div Текущая
-        span = link_to 'Посмотреть карточки', deck_path(deck)
-        span = link_to 'Редактировать', edit_deck_path(deck)
-        span = link_to 'Удалить', deck_path(deck),
-                       method: :delete
-        span = link_to 'Сделать текущей', deck_set_current_deck_path(deck), method: :put
+
+ul class = "decks clearfix"
+  - @decks.each do |deck|
+
+      li class="decks__item bs-callout bs-callout-default"
+        div
+          - if deck.current?
+            h4 class="decks__current" Текущая
+
+          div class="decks__name" = deck.name
+
+          div class="btn-group"
+            = link_to 'Посмотреть карточки', deck_path(deck), class: 'btn btn-default'
+            - unless deck.current?
+              = link_to 'Сделать текущей', deck_set_current_deck_path(deck), method: :put, class: 'btn btn-default'
+
+          div class="btn-group pull-right"
+            = link_to 'Редактировать', edit_deck_path(deck), class: 'btn btn-success'
+            = link_to 'Удалить', deck_path(deck), method: :delete, class: 'btn btn-danger'
