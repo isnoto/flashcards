@@ -10,7 +10,7 @@ describe 'Managing cards', js: true do
   end
 
   context 'When user try to create card' do
-    it 'not allows create empty cards' do
+    it 'not allows to create empty cards' do
       visit_create_card_path
       click_button 'Создать'
       expect(page).to have_content('Заполните все поля!')
