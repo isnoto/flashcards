@@ -18,6 +18,7 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'fog', require: 'fog/aws'
 gem 'select2-rails'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'byebug'
