@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :require_login
 
   def show
-    @card = Card.random_card(current_user.id)
+    @card = current_user.random_card
   end
 
   def create

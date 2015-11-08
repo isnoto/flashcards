@@ -23,7 +23,14 @@ class User < ActiveRecord::Base
             presence: true
   validates :email, format: { with: EMAIL_REGEX }
 
-  def cards_for_review
-    cards.random_for_review
+
+  def random_card
+    user = User.find(self.id)
+
+    if user.current_deck
+      user.current_deck.cards.random_for_review.first
+    else
+      user.cards.random_for_review.first
+    end
   end
 end

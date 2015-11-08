@@ -22,17 +22,6 @@ class Card < ActiveRecord::Base
     update_attributes(review_date: add_review_date) if result
   end
 
-  def self.random_card(user_id)
-    user = User.find(user_id)
-
-    if user.current_deck
-      user.current_deck.cards.random_for_review.first
-    else
-      user.cards_for_review.first
-    end
-  end
-
-
   def self.create_card_in_deck(user, params)
     deck = get_deck(params[:deck_name], user)
 
