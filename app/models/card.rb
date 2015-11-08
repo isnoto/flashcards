@@ -48,10 +48,6 @@ class Card < ActiveRecord::Base
   def self.get_deck(deck_name, user)
     deck = user.decks.find_by(name: deck_name)
 
-    if deck.nil?
-      user.decks.create(name: deck_name)
-    else
-      deck
-    end
+    deck || user.decks.create(name: deck_name)
   end
 end
