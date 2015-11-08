@@ -23,7 +23,7 @@ class Card < ActiveRecord::Base
   end
 
   def self.create_card_in_deck(user, params)
-    deck = get_deck(params[:deck_name], user)
+    deck = find_or_create_deck(params[:deck_name], user)
 
     deck.cards.build(params)
   end
@@ -45,7 +45,7 @@ class Card < ActiveRecord::Base
     self.review_date = Time.now + 3.days
   end
 
-  def self.get_deck(deck_name, user)
+  def self.find_or_create_deck(deck_name, user)
     deck = user.decks.find_by(name: deck_name)
 
     deck || user.decks.create(name: deck_name)
