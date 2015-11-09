@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
             if: :password
   validates :email, :name,
             uniqueness: true,
-            presence: true
+            presence: true,
+            if: :email
   validates :email, format: { with: EMAIL_REGEX }
 
 
