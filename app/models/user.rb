@@ -18,11 +18,13 @@ class User < ActiveRecord::Base
             confirmation: true, if: :password
   validates :password_confirmation, presence: true,
             if: :password
-  validates :email, :name,
+  validates :name,
             uniqueness: true,
+            presence: true
+  validates :email, uniqueness: true,
             presence: true,
+            format: { with: EMAIL_REGEX },
             if: :email
-  validates :email, format: { with: EMAIL_REGEX }
 
 
   def random_card
