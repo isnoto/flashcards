@@ -190,6 +190,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -255,6 +257,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.4)
     railties (4.2.4)
       actionpack (= 4.2.4)
       activesupport (= 4.2.4)
@@ -350,12 +357,14 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   fog
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri
   pg (~> 0.18.3)
   poltergeist
   rails (= 4.2.4)
+  rails_12factor
   rmagick
   rspec-rails
   sass-rails (~> 5.0)
