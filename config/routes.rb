@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'reviews#show'
+  root 'home#index'
 
   resources :reviews,       only: [:show, :create]
   resources :cards
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/sign_up', to: 'registrations#new', as: 'sign_up'
   get '/log_in', to: 'sessions#new', as: :log_in
+  get '/reviews', to: 'reviews#show'
   delete '/log_out', to: 'sessions#destroy', as: :log_out
 
   post 'oauth/callback', to: 'oauths#callback'
