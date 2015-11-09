@@ -18,7 +18,11 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'fog', require: 'fog/aws'
 gem 'select2-rails'
-gem 'rails_12factor', group: :production
+gem 'font-awesome-rails'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'byebug'

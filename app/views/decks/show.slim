@@ -1,11 +1,16 @@
 ul class="cards clearfix"
+  - counter = 0
   - @deck.cards.each do |card|
+
     li class="bs-callout bs-callout-primary"
       div class="cards__info-wrapper"
-        div = image_tag card.image.thumb
-        div Оригинал: #{ card.original_text }
-        div Перевод:  #{ card.translated_text }
-        div Дата пересмотра: #{ card.review_date.strftime("%d/%m/%Y") }
+        h4 Карточка # #{ counter += 1 }
+
+        div class="cards__info"
+          div = image_tag card.image.thumb
+          div Оригинал: #{ card.original_text }
+          div Перевод:  #{ card.translated_text }
+          div Дата пересмотра: #{ card.review_date.strftime("%d/%m/%Y") }
 
       div class="btn-group"
         = link_to 'Редактировать', edit_card_path(card), class: 'btn btn-success'
