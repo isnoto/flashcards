@@ -1,8 +1,8 @@
 require 'nokogiri'
 require 'open-uri'
 
-user = User.create(email: 'test@gmail.com',
-                   password: '123456')
+user = User.create(name: 'Test', email: 'test@gmail.com',
+                   password: 123456, password_confirmation: 123456)
 deck = Deck.create(name: 'test', user_id: user.id)
 
 source = "http://www.languagedaily.com/learn-german/vocabulary/common-german-words"
