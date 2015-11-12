@@ -11,8 +11,7 @@ class ReviewsController < ApplicationController
     if @card.check_answer(review_params[:answer])
       redirect_to root_path, notice: 'Верно!'
     else
-      flash.now[:alert] = 'Ваш ответ не правильный'
-      render :show
+      redirect_to root_path, alert: 'Ваш ответ не правильный'
     end
   end
 

@@ -19,7 +19,37 @@ class Card < ActiveRecord::Base
   def check_answer(answer)
     result = prepare_word(answer) == prepare_word(original_text)
 
-    update_attributes(review_date: add_review_date) if result
+    if result
+      set_review_interval
+    else
+      increment!(:incorrect_answers)
+      set_review_interval if incorrect_answers == 3
+
+      result
+    end
+  end
+
+  def set_review_interval
+    if incorrect_answers == 3
+      update_attributes(review_date: Time.now + 12.hours,
+                        correct_answers: 0, incorrect_answers: 0)
+    else
+      increment!(:correct_answers)
+
+      update_attributes(review_date: Time.now + interval(correct_answers))
+    end
+  end
+
+  def interval(attempts)
+
+    case attempts
+      when 1 then 12.hours
+      when 2 then 3.day
+      when 3 then 1.week
+      when 4 then 2.weeks
+      else 1.month
+    end
+
   end
 
   def self.create_card_in_deck(user, params)
@@ -42,7 +72,7 @@ class Card < ActiveRecord::Base
   end
 
   def add_review_date
-    self.review_date = Time.now + 3.days
+    self.review_date = Time.now
   end
 
   def self.find_or_create_deck(deck_name, user)
