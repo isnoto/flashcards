@@ -44,7 +44,7 @@ class Card < ActiveRecord::Base
 
     case attempts
       when 1 then 12.hours
-      when 2 then 3.day
+      when 2 then 3.days
       when 3 then 1.week
       when 4 then 2.weeks
       else 1.month
