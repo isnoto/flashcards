@@ -30,27 +30,19 @@ class Card < ActiveRecord::Base
   end
 
   def set_review_interval
+    intervals = [12.hours, 3.days, 1.week, 2.weeks]
+
     if incorrect_answers == 3
       update_attributes(review_date: Time.now + 12.hours,
                         correct_answers: 0, incorrect_answers: 0)
     else
       increment!(:correct_answers)
+      interval = intervals[correct_answers - 1] || 1.month
 
-      update_attributes(review_date: Time.now + interval(correct_answers))
+      update_attributes(review_date: Time.now + interval)
     end
   end
 
-  def interval(attempts)
-
-    case attempts
-      when 1 then 12.hours
-      when 2 then 3.days
-      when 3 then 1.week
-      when 4 then 2.weeks
-      else 1.month
-    end
-
-  end
 
   def self.create_card_in_deck(user, params)
     deck = find_or_create_deck(params[:deck_name], user)
