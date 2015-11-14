@@ -22,13 +22,13 @@ class Card < ActiveRecord::Base
     result = prepare_word(answer) == prepare_word(original_text)
 
     if result
-      set_review_int_correct_answers
+      set_review_interval_correct_answers
     else
-      set_review_int_wrong_answers ? :wrong_answers_streak : :wrong_answer
+      set_review_interval_wrong_answers ? :wrong_answers_streak : :wrong_answer
     end
   end
 
-  def set_review_int_correct_answers
+  def set_review_interval_correct_answers
     interval = INTERVALS[correct_answers] || 1.month
 
     update_attributes(review_date: Time.now + interval,
@@ -37,7 +37,7 @@ class Card < ActiveRecord::Base
     :correct_answer
   end
 
-  def set_review_int_wrong_answers
+  def set_review_interval_wrong_answers
     increment!(:incorrect_answers)
 
     if incorrect_answers == 3
