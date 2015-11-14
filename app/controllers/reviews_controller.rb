@@ -17,10 +17,7 @@ class ReviewsController < ApplicationController
         flash[:remind] = 'Вы ввели три раза не правильно!
                             Сделующая дата пересмотра карточки через 12 часов.'
         redirect_to root_path
-      else
-        redirect_to cards_path
     end
-
   end
 
 
