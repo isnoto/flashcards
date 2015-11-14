@@ -74,21 +74,21 @@ require 'rails_helper'
       end
 
       context 'when gives 3 times correct answer' do
-        it 'set review date +1 week from now ' do
+        it 'set review date +1 week from now' do
           3.times { card.check_answer(card.original_text) }
           expect(card.review_date).to eq (Time.now + 1.week).to_date
         end
       end
 
       context 'when gives 4 times correct answer' do
-        it 'set review date +2 weeks from now ' do
+        it 'set review date +2 weeks from now' do
           4.times { card.check_answer(card.original_text) }
           expect(card.review_date).to eq (Time.now + 2.week).to_date
         end
       end
 
       context 'when gives 5 times correct answer' do
-        it 'set review date +1 month from now ' do
+        it 'set review date +1 month from now' do
           5.times { card.check_answer(card.original_text) }
           expect(card.review_date).to eq (Time.now + 1.month).to_date
         end

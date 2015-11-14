@@ -16,30 +16,33 @@ class Card < ActiveRecord::Base
   scope :condition,         -> { where('review_date <= ?', Time.now) }
   scope :random_for_review, -> { condition.offset(rand(condition.count)) }
 
+  INTERVALS = [12.hours, 3.days, 1.week, 2.weeks]
+
   def check_answer(answer)
     result = prepare_word(answer) == prepare_word(original_text)
 
     if result
-      set_review_interval
+      set_review_int_correct_answers
     else
-      increment!(:incorrect_answers)
-      set_review_interval if incorrect_answers == 3
-
-      result
+      set_review_int_wrong_answers ? :wrong_answers_streak : :wrong_answer
     end
   end
 
-  def set_review_interval
-    intervals = [12.hours, 3.days, 1.week, 2.weeks]
+  def set_review_int_correct_answers
+    increment(:correct_answers)
+    interval = INTERVALS[correct_answers - 1] || 1.month
+
+    update_attributes(review_date: Time.now + interval, incorrect_answers: 0)
+
+    :correct_answer
+  end
+
+  def set_review_int_wrong_answers
+    increment!(:incorrect_answers)
 
     if incorrect_answers == 3
       update_attributes(review_date: Time.now + 12.hours,
                         correct_answers: 0, incorrect_answers: 0)
-    else
-      increment!(:correct_answers)
-      interval = intervals[correct_answers - 1] || 1.month
-
-      update_attributes(review_date: Time.now + interval)
     end
   end
 
