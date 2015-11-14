@@ -20,10 +20,10 @@ require 'rails_helper'
 
     context '#check_answer' do
       context 'when answer is correct' do
-        let!(:correct_answer) { card.check_answer('Hello') }
+        let!(:correct_ans) { card.check_answer('Hello') }
 
         it 'user\'s answer equals to original text' do
-          expect(correct_answer).to be true
+          expect(correct_ans).to be :correct_answer
         end
 
         it 'increment field correct_answers by 1' do
@@ -32,10 +32,10 @@ require 'rails_helper'
       end
 
       context 'when answer is incorrect' do
-        let!(:incorrect_answer) { card.check_answer('Aloha') }
+        let!(:incorrect_ans) { card.check_answer('Aloha') }
 
         it 'user\'s answer not equals to original text' do
-          expect(incorrect_answer).to be false
+          expect(incorrect_ans).to be :wrong_answer
         end
 
         it 'increment field incorrect_answers by 1' do
