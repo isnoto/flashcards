@@ -49,7 +49,7 @@ class Card < ActiveRecord::Base
   end
 
   def check_typos(answer)
-    DamerauLevenshtein.distance(original_text, answer, 0) < 2
+    DamerauLevenshtein.distance(original_text, answer, 0) == 1
   end
 
 
