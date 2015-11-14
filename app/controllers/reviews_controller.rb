@@ -8,11 +8,15 @@ class ReviewsController < ApplicationController
   def create
     @card = Card.find(review_params[:card_id])
 
-    if @card.check_answer(review_params[:answer])
-      redirect_to root_path, notice: 'Верно!'
-    else
-      flash.now[:alert] = 'Ваш ответ не правильный'
-      render :show
+    case @card.check_answer(review_params[:answer])
+      when :correct_answer
+        redirect_to root_path, notice: 'Верно!'
+      when :wrong_answer
+        redirect_to root_path, alert: 'Ваш ответ не правильный'
+      when :wrong_answers_streak
+        flash[:remind] = 'Вы ввели три раза не правильно!
+                            Сделующая дата пересмотра карточки через 12 часов.'
+        redirect_to root_path
     end
   end
 
