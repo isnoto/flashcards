@@ -12,7 +12,8 @@ class ReviewsController < ApplicationController
     when :correct_answer
       redirect_to root_path, notice: 'Верно!'
     when :typo_in_word
-      flash.now[:remind] = "Возможно вы ввиду слово #{@card.original_text}."
+      flash.now[:remind] = "Вы ввели #{review_params[:answer]}.
+                            Возможно вы ввиду слово #{@card.original_text}."
       render :show
     when :wrong_answer
       redirect_to root_path, alert: 'Ваш ответ не правильный'
