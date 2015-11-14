@@ -23,6 +23,8 @@ class Card < ActiveRecord::Base
 
     if result
       set_review_interval_correct_answers
+    elsif check_typos(answer)
+      :typo_in_word
     else
       set_review_interval_wrong_answers ? :wrong_answers_streak : :wrong_answer
     end
@@ -44,6 +46,10 @@ class Card < ActiveRecord::Base
       update_attributes(review_date: Time.now + 12.hours,
                         correct_answers: 0, incorrect_answers: 0)
     end
+  end
+
+  def check_typos(answer)
+    DamerauLevenshtein.distance(original_text, answer, 0) < 2
   end
 
 

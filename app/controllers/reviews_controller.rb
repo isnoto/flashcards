@@ -11,10 +11,13 @@ class ReviewsController < ApplicationController
     case @card.check_answer(review_params[:answer])
       when :correct_answer
         redirect_to root_path, notice: 'Верно!'
+      when :typo_in_word
+        flash.now[:remind] = "Возможно вы ввиду слово #{ @card.original_text }."
+        render :show
       when :wrong_answer
         redirect_to root_path, alert: 'Ваш ответ не правильный'
       when :wrong_answers_streak
-        flash[:remind] = 'Вы ввели три раза не правильно!
+        flash[:alert] = 'Вы ввели три раза не правильно!
                             Сделующая дата пересмотра карточки через 12 часов.'
         redirect_to root_path
     end
