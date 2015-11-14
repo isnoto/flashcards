@@ -29,10 +29,10 @@ class Card < ActiveRecord::Base
   end
 
   def set_review_int_correct_answers
-    increment(:correct_answers)
-    interval = INTERVALS[correct_answers - 1] || 1.month
+    interval = INTERVALS[correct_answers] || 1.month
 
-    update_attributes(review_date: Time.now + interval, incorrect_answers: 0)
+    update_attributes(review_date: Time.now + interval,
+                      correct_answers: correct_answers + 1, incorrect_answers: 0)
 
     :correct_answer
   end
