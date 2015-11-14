@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.18.3'
 gem 'slim-rails'
 gem 'simple_form'
+gem 'bootstrap-sass'
 gem 'nokogiri'
 gem 'sorcery'
 gem 'rmagick'
