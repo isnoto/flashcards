@@ -1,7 +1,9 @@
 function init() {
   function changeClassCurrentDeck() {
     var decksWrap = document.querySelector('.decks');
-    if (!decksWrap) return;
+    if (!decksWrap) {
+      return;
+    }
 
     var decks = decksWrap.querySelectorAll('.decks__item');
 
@@ -18,7 +20,9 @@ function init() {
 
   function insertCurrentDeckAtTheTop() {
     var decksWrap = document.querySelector('.decks');
-    if (!decksWrap) return;
+    if (!decksWrap) {
+      return;
+    }
 
     var decks = decksWrap.querySelectorAll('.decks__item');
 
