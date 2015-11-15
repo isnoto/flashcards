@@ -42,6 +42,14 @@ require 'rails_helper'
           expect(card.incorrect_answers).to eq 1
         end
       end
+
+      context 'when user made typo in word' do
+        let(:typo_answer) { card.check_answer('ehllo') }
+
+        it 'return symbol ":typo_in_word"' do
+          expect(typo_answer).to eq :typo_in_word
+        end
+      end
     end
 
     before do
