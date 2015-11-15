@@ -23,7 +23,7 @@ class Card < ActiveRecord::Base
 
     if result
       set_review_interval_correct_answers
-    elsif check_typos(answer)
+    elsif number_of_typos(answer) <= 2
       :typo_in_word
     else
       set_review_interval_wrong_answers ? :wrong_answers_streak : :wrong_answer
@@ -48,8 +48,8 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def check_typos(answer)
-    DamerauLevenshtein.distance(original_text, answer, 0) <= 2
+  def number_of_typos(answer)
+    DamerauLevenshtein.distance(original_text, answer, 0)
   end
 
 
