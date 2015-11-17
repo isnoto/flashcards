@@ -13,7 +13,7 @@ class Card < ActiveRecord::Base
   validates :deck_name, presence: true, if: :deck_name
   validate :words_cannot_be_equal
 
-  scope :condition,         -> { where('review_date <= ?', Time.now) }
+  scope :condition,         -> { where('review_date <= ?', Time.zone.now) }
   scope :random_for_review, -> { condition.offset(rand(condition.count)) }
 
   INTERVALS = [12.hours, 3.days, 1.week, 2.weeks]
@@ -33,7 +33,7 @@ class Card < ActiveRecord::Base
   def set_review_interval_correct_answers
     interval = INTERVALS[correct_answers] || 1.month
 
-    update_attributes(review_date: Time.now + interval,
+    update_attributes(review_date: Time.zone.now + interval,
                       correct_answers: correct_answers + 1, incorrect_answers: 0)
 
     :correct_answer
@@ -43,7 +43,7 @@ class Card < ActiveRecord::Base
     increment!(:incorrect_answers)
 
     if incorrect_answers == 3
-      update_attributes(review_date: Time.now + 12.hours,
+      update_attributes(review_date: Time.zone.now + 12.hours,
                         correct_answers: 0, incorrect_answers: 0)
     end
   end
@@ -55,7 +55,7 @@ class Card < ActiveRecord::Base
   end
 
   def self.notify_user_for_review_pending_cards
-    Card.where('review_date <= ?', Time.now).each do |card|
+    Card.where('review_date <= ?', Time.zone.now).each do |card|
       CardsMailer.pending_cards_notification(card.deck.user).deliver_now
     end
   end
@@ -74,7 +74,7 @@ class Card < ActiveRecord::Base
   end
 
   def add_review_date
-    self.review_date = Time.now
+    self.review_date = Time.zone.now
   end
 
   def self.find_or_create_deck(deck_name, user)
