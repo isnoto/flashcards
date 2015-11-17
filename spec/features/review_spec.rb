@@ -8,7 +8,7 @@ describe 'Reviewing card' do
     login(user.email)
   end
 
-  context 'When there are cards_mailer for review' do
+  context 'When there are cards for review' do
     subject! { create(:card, deck_id: deck.id, deck_name: deck.name) }
 
     before do
@@ -40,7 +40,7 @@ describe 'Reviewing card' do
   end
 
   context 'When there are not card for review' do
-    it 'shows message "All cards_mailer reviewed"' do
+    it 'shows message "All cards reviewed"' do
       visit root_path
       expect(page).to have_content('Все карточки пересмотрены')
     end

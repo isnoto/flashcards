@@ -1,4 +1,4 @@
-desc 'notify users for review pending cards_mailer'
+desc 'notify users for review pending cards'
 task notify_pending_cards: :environment do
-  User.notify_user_for_review_pending_cards
+  User.notify_pending_cards
 end

@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20151112120935) do
 
   add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", using: :btree
 
-  create_table "cards_mailer", force: :cascade do |t|
+  create_table "cards", force: :cascade do |t|
     t.string   "original_text"
     t.string   "translated_text"
     t.date     "review_date"

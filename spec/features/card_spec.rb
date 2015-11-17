@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Managing cards_mailer', js: true do
+describe 'Managing cards', js: true do
   let!(:user) { create(:user) }
   let!(:deck) { create(:deck, user_id: user.id) }
 
@@ -10,13 +10,13 @@ describe 'Managing cards_mailer', js: true do
   end
 
   context 'When user try to create card' do
-    it 'not allows to create empty cards_mailer' do
+    it 'not allows to create empty cards' do
       visit_create_card_path
       click_button 'Создать'
       expect(page).to have_content('Заполните все поля!')
     end
 
-    it 'allows to create cards_mailer in deck' do
+    it 'allows to create cards in deck' do
       visit_create_card_path
       card_fill_in
       select deck.name, from: 'Deck'

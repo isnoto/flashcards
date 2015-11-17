@@ -13,7 +13,7 @@ describe 'User authorization' do
         expect(page).to have_content(user.name)
       end
 
-      it 'allows edit cards_mailer' do
+      it 'allows edit cards' do
         create_card
         click_link 'Редактировать'
         fill_in :card_original_text, with: 'Another word'
@@ -36,7 +36,7 @@ describe 'User authorization' do
 
       let(:another_deck) { create(:deck, user_id: another_user.id) }
 
-      it 'grants access only to user\'s cards_mailer' do
+      it 'grants access only to user\'s cards' do
         card = another_deck.cards.push(build(:card))
 
         expect {
@@ -52,7 +52,7 @@ describe 'User authorization' do
     end
 
     context 'when user not logged in' do
-      it 'denies access to cards_mailer' do
+      it 'denies access to cards' do
         visit cards_path
         expect(current_path).to eq log_in_path
       end

@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.notify_user_for_review_pending_cards
+  def self.notify_pending_cards
     User.all.each do |user|
       if user.random_card
         CardsMailer.pending_cards_notification(user).deliver_now
