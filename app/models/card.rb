@@ -48,15 +48,16 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def number_of_typos(answer)
-    DamerauLevenshtein.distance(original_text, answer, 0)
-  end
-
-
   def self.create_card_in_deck(user, params)
     deck = find_or_create_deck(params[:deck_name], user)
 
     deck.cards.build(params)
+  end
+
+  def self.notify_user_for_review_pending_cards
+    Card.where(review_date: Time.now).each do |card|
+      CardsMailer.pending_cards_notification(card.deck.user).deliver_now
+    end
   end
 
   private
@@ -80,5 +81,9 @@ class Card < ActiveRecord::Base
     deck = user.decks.find_by(name: deck_name)
 
     deck || user.decks.create(name: deck_name)
+  end
+
+  def number_of_typos(answer)
+    DamerauLevenshtein.distance(original_text, answer, 0)
   end
 end
