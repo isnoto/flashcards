@@ -35,4 +35,12 @@ class User < ActiveRecord::Base
       user.cards.random_for_review.first
     end
   end
+
+  def self.notify_user_for_review_pending_cards
+    User.all.each do |user|
+      if user.random_card
+        CardsMailer.pending_cards_notification(user).deliver_now
+      end
+    end
+  end
 end

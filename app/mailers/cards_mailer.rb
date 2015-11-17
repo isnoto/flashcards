@@ -1,10 +1,9 @@
 class CardsMailer < ApplicationMailer
-  default from: 'flashcards.se@gmail.com',
-          template_path: 'mailers/cards'
+  default from: Rails.application.secrets.smtp_email_address
 
   def pending_cards_notification(user)
     @name = user.name
-    email = user.email
-    mail(to: "#{email}", subject: 'У вас появились карточки для повторения')
+
+    mail(to: user.email, subject: 'У вас появились карточки для повторения')
   end
 end

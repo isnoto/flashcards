@@ -30,34 +30,10 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def set_review_interval_correct_answers
-    interval = INTERVALS[correct_answers] || 1.month
-
-    update_attributes(review_date: Time.zone.now + interval,
-                      correct_answers: correct_answers + 1, incorrect_answers: 0)
-
-    :correct_answer
-  end
-
-  def set_review_interval_wrong_answers
-    increment!(:incorrect_answers)
-
-    if incorrect_answers == 3
-      update_attributes(review_date: Time.zone.now + 12.hours,
-                        correct_answers: 0, incorrect_answers: 0)
-    end
-  end
-
   def self.create_card_in_deck(user, params)
     deck = find_or_create_deck(params[:deck_name], user)
 
     deck.cards.build(params)
-  end
-
-  def self.notify_user_for_review_pending_cards
-    Card.where('review_date <= ?', Time.zone.now).each do |card|
-      CardsMailer.pending_cards_notification(card.deck.user).deliver_now
-    end
   end
 
   private
@@ -81,6 +57,24 @@ class Card < ActiveRecord::Base
     deck = user.decks.find_by(name: deck_name)
 
     deck || user.decks.create(name: deck_name)
+  end
+
+  def set_review_interval_correct_answers
+    interval = INTERVALS[correct_answers] || 1.month
+
+    update_attributes(review_date: Time.zone.now + interval,
+                      correct_answers: correct_answers + 1, incorrect_answers: 0)
+
+    :correct_answer
+  end
+
+  def set_review_interval_wrong_answers
+    increment!(:incorrect_answers)
+
+    if incorrect_answers == 3
+      update_attributes(review_date: Time.zone.now + 12.hours,
+                        correct_answers: 0, incorrect_answers: 0)
+    end
   end
 
   def number_of_typos(answer)
