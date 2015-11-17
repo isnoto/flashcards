@@ -1,5 +1,5 @@
 class CardsMailer < ApplicationMailer
-  default from: 'test@example.com',
+  default from: 'flashcards.se@gmail.com',
           template_path: 'mailers/cards'
 
   def pending_cards_notification (user)
