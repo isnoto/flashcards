@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
             format: { with: EMAIL_REGEX },
             if: :email
 
+  scope :with_email,    -> { where.not(email: nil) }
   scope :pending_cards, -> { where('cards.review_date <= ?', Time.zone.now) }
-  scope :users_with_pending_cards, -> { pending_cards.where.not(email: nil) }
 
   def random_card
     user = User.find(self.id)
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_pending_cards
-    User.joins(:cards).users_with_pending_cards.uniq.find_each do |user|
+    User.joins(:cards).with_email.pending_cards.uniq.find_each do |user|
       CardsMailer.pending_cards_notification(user).deliver_now
     end
   end
