@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
             format: { with: EMAIL_REGEX },
             if: :email
 
-  scope :pending_cards,    -> { where('cards.review_date <= ?', Time.zone.now) }
+  scope :pending_cards, -> { where('cards.review_date <= ?', Time.zone.now) }
   scope :users_with_pending_cards, -> { pending_cards.where.not(email: nil) }
 
   def random_card
