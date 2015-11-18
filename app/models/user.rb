@@ -37,10 +37,10 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_pending_cards
-    User.find_each do |user|
-      if user.random_card
-        CardsMailer.pending_cards_notification(user).deliver_now
-      end
+    scope :condition, -> { where('cards.review_date <= ?', Time.zone.now) }
+
+    User.joins(:cards).condition.uniq.find_each do |user|
+      CardsMailer.pending_cards_notification(user).deliver_now
     end
   end
 end
