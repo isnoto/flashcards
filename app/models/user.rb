@@ -25,11 +25,6 @@ class User < ActiveRecord::Base
             format: { with: EMAIL_REGEX },
             if: :email
 
-  scope :with_email,         -> { where.not(email: nil) }
-  scope :with_pending_cards, -> do
-    User.joins(:cards).merge(Card.for_review).uniq
-  end
-
   def random_card
     user = User.find(self.id)
 
@@ -41,8 +36,14 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_pending_cards
-    User.with_email.with_pending_cards.find_each do |user|
+    User.pending_cards.find_each do |user|
       CardsMailer.pending_cards_notification(user).deliver_now
     end
+  end
+
+  private
+
+  def self.pending_cards
+    User.joins(:cards).where.not(email: nil).merge(Card.for_review).uniq
   end
 end
