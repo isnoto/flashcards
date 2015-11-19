@@ -41,8 +41,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
-
   def self.pending_cards
     User.joins(:cards).where.not(email: nil).merge(Card.for_review).uniq
   end
