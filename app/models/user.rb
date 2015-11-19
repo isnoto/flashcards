@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
             format: { with: EMAIL_REGEX },
             if: :email
 
-  scope :with_email,    -> { where.not(email: nil) }
+  scope :with_email,         -> { where.not(email: nil) }
   scope :with_pending_cards, -> do
-    User.joins(:cards).merge(Card.condition).uniq
+    User.joins(:cards).merge(Card.for_review).uniq
   end
 
   def random_card
