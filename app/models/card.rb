@@ -13,8 +13,8 @@ class Card < ActiveRecord::Base
   validates :deck_name, presence: true, if: :deck_name
   validate :words_cannot_be_equal
 
-  scope :condition,         -> { where('review_date <= ?', Time.zone.now) }
-  scope :random_for_review, -> { condition.offset(rand(condition.count)) }
+  scope :for_review,        -> { where('review_date <= ?', Time.zone.now) }
+  scope :random_for_review, -> { for_review.offset(rand(for_review.count)) }
 
   INTERVALS = [12.hours, 3.days, 1.week, 2.weeks]
 
