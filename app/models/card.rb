@@ -13,8 +13,8 @@ class Card < ActiveRecord::Base
   validates :deck_name, presence: true, if: :deck_name
   validate :words_cannot_be_equal
 
-  scope :condition,         -> { where('review_date <= ?', Time.now) }
-  scope :random_for_review, -> { condition.offset(rand(condition.count)) }
+  scope :for_review,        -> { where('review_date <= ?', Time.zone.now) }
+  scope :random_for_review, -> { for_review.offset(rand(for_review.count)) }
 
   INTERVALS = [12.hours, 3.days, 1.week, 2.weeks]
 
@@ -29,29 +29,6 @@ class Card < ActiveRecord::Base
       set_review_interval_wrong_answers ? :wrong_answers_streak : :wrong_answer
     end
   end
-
-  def set_review_interval_correct_answers
-    interval = INTERVALS[correct_answers] || 1.month
-
-    update_attributes(review_date: Time.now + interval,
-                      correct_answers: correct_answers + 1, incorrect_answers: 0)
-
-    :correct_answer
-  end
-
-  def set_review_interval_wrong_answers
-    increment!(:incorrect_answers)
-
-    if incorrect_answers == 3
-      update_attributes(review_date: Time.now + 12.hours,
-                        correct_answers: 0, incorrect_answers: 0)
-    end
-  end
-
-  def number_of_typos(answer)
-    DamerauLevenshtein.distance(original_text, answer, 0)
-  end
-
 
   def self.create_card_in_deck(user, params)
     deck = find_or_create_deck(params[:deck_name], user)
@@ -73,12 +50,34 @@ class Card < ActiveRecord::Base
   end
 
   def add_review_date
-    self.review_date = Time.now
+    self.review_date = Time.zone.now
   end
 
   def self.find_or_create_deck(deck_name, user)
     deck = user.decks.find_by(name: deck_name)
 
     deck || user.decks.create(name: deck_name)
+  end
+
+  def set_review_interval_correct_answers
+    interval = INTERVALS[correct_answers] || 1.month
+
+    update_attributes(review_date: Time.zone.now + interval,
+                      correct_answers: correct_answers + 1, incorrect_answers: 0)
+
+    :correct_answer
+  end
+
+  def set_review_interval_wrong_answers
+    increment!(:incorrect_answers)
+
+    if incorrect_answers == 3
+      update_attributes(review_date: Time.zone.now + 12.hours,
+                        correct_answers: 0, incorrect_answers: 0)
+    end
+  end
+
+  def number_of_typos(answer)
+    DamerauLevenshtein.distance(original_text, answer, 0)
   end
 end
