@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   belongs_to :current_deck, class_name: Deck
 
+  before_create :set_locale
+
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
@@ -43,5 +45,9 @@ class User < ActiveRecord::Base
 
   def self.pending_cards
     User.joins(:cards).where.not(email: nil).merge(Card.for_review).uniq
+  end
+
+  def set_locale
+    self.locale = I18n.locale
   end
 end
