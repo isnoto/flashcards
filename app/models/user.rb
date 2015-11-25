@@ -49,4 +49,8 @@ class User < ActiveRecord::Base
   def set_locale
     self.locale = I18n.locale
   end
+
+  def available_locales
+    I18n.available_locales.map(&:to_s)
+  end
 end
