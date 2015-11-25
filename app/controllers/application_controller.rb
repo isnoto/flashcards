@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    flash[:alert] = 'У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь'
+    flash[:alert] = t('flash.not_authenticated')
     redirect_to log_in_path
   end
 end

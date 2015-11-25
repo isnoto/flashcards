@@ -6,9 +6,9 @@ class ProfileController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to edit_profile_path, notice: 'Данные обновлены'
+      redirect_to edit_profile_path, notice: t('flash.data_updated')
     else
-      flash.now[:alert] = 'Данные заполнены некорректно!'
+      flash.now[:alert] = t('flash.wrong_filling')
       render 'edit'
     end
   end

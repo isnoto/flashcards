@@ -1,23 +1,94 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  app:
+    info: "The world's first user-friendly flashcards manager. Exactly."
+    name: "Flashcards"
+
+  button:
+    edit: "Edit"
+    delete: "Delete"
+    show_cards: "Show cards"
+    set_current: "Set current"
+    sign_in_fb: "Sign in Facebook"
+    sign_in_tw: "Sign in Twitter"
+    log_in: "Log in"
+    confirm: "Confirm"
+
+  link:
+    add_card: "Add card"
+    all_cards: "All cards"
+    add_deck: "Add deck"
+    all_decks: "All decks"
+    log_in: "Log in"
+    log_out: "Log out"
+    registration: "Registration"
+
+  card:
+    name: "Card"
+    original_text: "Original"
+    translated_text: "Translate"
+    review_date: "Review date"
+    deck_name: "Deck"
+    create_or_select: "Select or create new one"
+
+  deck:
+    current: "Current"
+
+  flash:
+    card_created: "Card created"
+    card_updated: "Card successfully updated!"
+    deck_deleted: "You have deleted the deck %{deck}"
+    deck_current: "You made the deck %{deck} current"
+    deck_set_current: "You must select the current deck"
+    deck_current_error: "An error occurred while setting current deck."
+    deck_created: "Deck created"
+    deck_updated: "Deck name successfully updated!"
+    deck_empty: "You have no decks. Create new one."
+    review_hint: "You wrote %{your_word}. Perhaps you meant the word %{expected_word}"
+    review_correct_answer: "Correct"
+    review_wrong_answer: "Your answer is wrong"
+    review_streak_wrong_answers: "You have entered three times wrong! The next date of revision cards in 12 hours."
+    log_out: "See you!"
+    log_in: "Welcome!"
+    fill_in_fields: "Fill in all the fields!"
+    wrong_filling: "Data filled incorrectly!"
+    not_authenticated: "You have no access to this page! Please Log in or Register"
+    ouath_log_in: "You signed in by %{provider}"
+    ouath_wrong: "An error occurred while you signed in by %{provider}"
+    data_updated: "Date updated"
+    wrong_email_or_password: "Wrong E-mail or Password"
+
+  review:
+    enter_translate: "Enter your translation"
+    done: "All the cards are reviewed"
+
+  activerecord:
+    errors:
+      models:
+
+        card:
+          attributes:
+            original_text:
+              blank: "Can't be blank"
+            translated_text:
+              blank: "Can't be blank"
+            deck_name:
+              blank: "Select deck"
+
+        deck:
+          attributes:
+            name:
+              blank: "Can't be blank"
+
+        user:
+          attributes:
+            name:
+              blank: "Enter the name"
+            email:
+              blank: "Enter your E-mail"
+              taken: "The email address you have entered is already registered"
+              invalid: "The wrong format. Example: user@example.com"
+            password:
+              too_short: "Password must contain more then 3 symbols"
+            password_confirmation:
+              blank: "Can't be blank"
+              confirmation: "Enter your password again"

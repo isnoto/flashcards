@@ -19,16 +19,16 @@ class DecksController < ApplicationController
     @deck = current_user.decks.build(decks_params)
 
     if @deck.save
-      redirect_to decks_path, notice: 'Колода создана'
+      redirect_to decks_path, notice: t('flash.deck_created')
     else
-      flash.now[:alert] = 'Проверьте правильность заполнения поля!'
+      flash.now[:alert] = t('flash.wrong_filling')
       render :new
     end
   end
 
   def update
     if @deck.update(decks_params)
-      redirect_to decks_path, notice: 'Имя колоды успешно измененно'
+      redirect_to decks_path, notice: t('flash.deck_updated')
     else
       render :edit
     end
@@ -40,14 +40,14 @@ class DecksController < ApplicationController
     end
 
     @deck.destroy
-    redirect_to decks_path, notice: "Вы удалили колоду #{ @deck.name }"
+    redirect_to decks_path, notice: t('flash.deck_deleted', deck: @deck.name)
   end
 
   def set_current
     if current_user.update_attributes(current_deck_id: @deck.id)
-      redirect_to decks_path, notice: "Вы сделали колоду #{ @deck.name } текущей"
+      redirect_to decks_path, notice: t('flash.deck_current', deck: @deck.name)
     else
-      redirect_to decks_path, alert: 'Ошибка'
+      redirect_to decks_path, alert: t('flash.deck_current_error')
     end
   end
 
