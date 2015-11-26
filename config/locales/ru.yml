@@ -44,7 +44,7 @@ ru:
     deck_updated: "Имя колоды успешно измененно"
     deck_empty: "У вас пока нет колод. Создайте новую!"
     review_hint: "Вы ввели слово %{your_word}. Возможно вы имели ввиду слово %{expected_word}"
-    review_correct_answer: "Верно"
+    review_correct_answer: "Верно!"
     review_wrong_answer: "Ваш ответ не правильный"
     review_streak_wrong_answers: "Вы ввели три раза не правильно! Сделующая дата пересмотра карточки через 12 часов."
     log_out: "До скорой встречи!"
@@ -54,7 +54,7 @@ ru:
     not_authenticated: "У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь"
     ouath_log_in: "Вы вошли через %{provider}"
     ouath_wrong: "Ошибка входа через %{provider}"
-    data_updated: "Данные обновленны"
+    data_updated: "Данные обновлены"
     wrong_email_or_password: "Пароль или E-mail введен неверно!"
 
   review:

@@ -12,7 +12,7 @@ describe 'Reviewing card' do
     subject! { create(:card, deck_id: deck.id, deck_name: deck.name) }
 
     before do
-      subject.update_attributes(review_date: Date.today - 2.days)
+      subject.update_attributes(review_date: Time.zone.now - 2.days)
     end
 
     it 'card show on page' do
