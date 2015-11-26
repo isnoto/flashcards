@@ -9,7 +9,7 @@ class OauthsController < ApplicationController
 
     if @user
       redirect_to root_path, notice: t('flash.ouath_log_in',
-                                       provider: provider.titleize )
+                                       provider: provider.titleize)
     else
       begin
         @user = create_from(provider)
