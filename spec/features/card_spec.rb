@@ -5,6 +5,7 @@ describe 'Managing cards', js: true do
   let!(:deck) { create(:deck, user_id: user.id) }
 
   before do
+    Capybara.current_session.driver.headers = { 'Accept-Language' => 'ru' }
     login(user.email)
     visit new_card_path
   end
