@@ -27,12 +27,10 @@ class User < ActiveRecord::Base
             if: :email
 
   def random_card
-    user = User.find(self.id)
-
-    if user.current_deck
-      user.current_deck.cards.random_for_review.first
+    if current_deck
+      current_deck.cards.random_for_review.first
     else
-      user.cards.random_for_review.first
+      cards.random_for_review.first
     end
   end
 
