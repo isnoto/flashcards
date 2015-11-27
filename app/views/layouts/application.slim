@@ -24,7 +24,6 @@ html
                 = link_to current_user.name, edit_profile_path(current_user)
               li
                 = link_to t('link.log_out'), log_out_path, method: :delete
-            div = current_user.locale
 
           - else
             li
