@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Флэшкарточкер
+    title #{ t('app.name')}
     = stylesheet_link_tag    'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -10,28 +10,31 @@ html
     section#container
 
       header.clearfix
-        h1 = link_to 'Флэшкарточкер', '/'
+        h1 = link_to t('app.name'), '/'
         ul.navigation-links
           - if current_user
+
             li
-              = link_to 'Все карточки', cards_path
+              = link_to t('link.all_cards'), cards_path
             li
-              = link_to 'Все колоды', decks_path
+              = link_to t('link.all_decks'), decks_path
 
             ul class='pull-right'
               li
                 = link_to current_user.name, edit_profile_path(current_user)
               li
-                = link_to 'Выйти', log_out_path, method: :delete
+                = link_to t('link.log_out'), log_out_path, method: :delete
 
           - else
             li
-              = link_to 'Регистрация', sign_up_path
+              = link_to t('link.registration'), sign_up_path
             li
-              = link_to 'Войти', log_in_path
+              = link_to t('link.log_in'), log_in_path
 
 
       section
         - if flash.any?
           = render 'shared/flash'
         = yield
+
+      = render 'shared/footer'

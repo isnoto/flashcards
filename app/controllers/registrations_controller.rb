@@ -8,9 +8,9 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       login(params[:user][:email], params[:user][:password])
-      redirect_to root_path, notice: 'Добро пожаловать!'
+      redirect_to root_path, notice: t('flash.log_in')
     else
-      flash.now[:alert] = 'Заполните все поля!'
+      flash.now[:alert] = t('flash.fill_in_fields')
       render 'new'
     end
   end
@@ -18,6 +18,7 @@ class RegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :locale)
   end
 end

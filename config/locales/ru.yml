@@ -1,0 +1,94 @@
+ru:
+  app:
+    info: "Первый в мире удобный менеджер флеш-карточек. Именно так."
+    name: "Флэшкарточкер"
+
+  button:
+    edit: "Редактировать"
+    delete: "Удалить"
+    show_cards: "Посмотреть карточки"
+    set_current: "Сделать текущей"
+    sign_in_fb: "Войти Facebook"
+    sign_in_tw: "Войти Twitter"
+    log_in: "Войти"
+    confirm: "Подтвердить"
+
+  link:
+    add_card: "Добавить карточку"
+    all_cards: "Все карточки"
+    add_deck: "Добавить колоду"
+    all_decks: "Все колоды"
+    log_in: "Войти"
+    log_out: "Выйти"
+    registration: "Регистрация"
+
+  card:
+    name: "Карточка"
+    original_text: "Оригинал"
+    translated_text: "Перевод"
+    review_date: "Дата пересмотра"
+    deck_name: "Колода"
+    create_or_select: "Выберите колоду или создайте новую"
+
+  deck:
+    current: "Текущая"
+
+  flash:
+    card_created: "Карточка создана"
+    card_updated: "Карточка успешно отредактирована!"
+    deck_deleted: "Вы удалили колоду %{deck}"
+    deck_current: "Вы сделали колоду %{deck} текущей"
+    deck_set_current: "Нужно выбрать текущую колоду!"
+    deck_current_error: "При установке текущей колоды возникла ошибка."
+    deck_created: "Колода создана"
+    deck_updated: "Имя колоды успешно измененно"
+    deck_empty: "У вас пока нет колод. Создайте новую!"
+    review_hint: "Вы ввели слово %{your_word}. Возможно вы имели ввиду слово %{expected_word}"
+    review_correct_answer: "Верно!"
+    review_wrong_answer: "Ваш ответ не правильный"
+    review_streak_wrong_answers: "Вы ввели три раза не правильно! Сделующая дата пересмотра карточки через 12 часов."
+    log_out: "До скорой встречи!"
+    log_in: "Добро пожаловать!"
+    fill_in_fields: "Заполните все поля!"
+    wrong_filling: "Данные заполнены некорректно!"
+    not_authenticated: "У вас нету доступа до этой страницы! Войдите в свой профиль или зарегистрируйтесь"
+    ouath_log_in: "Вы вошли через %{provider}"
+    ouath_wrong: "Ошибка входа через %{provider}"
+    data_updated: "Данные обновлены"
+    wrong_email_or_password: "Пароль или E-mail введен неверно!"
+
+  review:
+    enter_translate: "Введите перевод"
+    done: "Все карточки пересмотрены"
+
+  activerecord:
+    errors:
+      models:
+
+        card:
+          attributes:
+            original_text:
+              blank: "Поле не может быть пустым"
+            translated_text:
+              blank: "Поле не может быть пустым"
+            deck_name:
+              blank: "Выберите колоду из списка или создайте новую"
+
+        deck:
+          attributes:
+            name:
+              blank: "Поле не может быть пустым"
+
+        user:
+          attributes:
+            name:
+              blank: "Укажите имя"
+            email:
+              blank: "Укажите ваш E-mail"
+              taken: "Данный E-mail уже зарегистрирован в системе"
+              invalid: "Неверный формат email. Пример: user@example.com"
+            password:
+              too_short: "Пароль должен содержать больше трех символов"
+            password_confirmation:
+              blank: "Поле не может быть пустым"
+              confirmation: "Введите ваш пароль еще раз"

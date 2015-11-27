@@ -63,20 +63,20 @@ require 'rails_helper'
         end
 
         it 'sets review date +12 hours from now' do
-          expect(card.review_date).to eq (Time.now + 12.hours).to_date
+          expect(card.review_date).to eq (Time.zone.now + 12.hours).to_date
         end
 
         context 'and then gives one more correct answer' do
           it 'set review date +3 days from now' do
             card.check_answer(card.original_text)
-            expect(card.review_date).to eq (Time.now + 3.days).to_date
+            expect(card.review_date).to eq (Time.zone.now + 3.days).to_date
           end
         end
 
         context 'and then give 3 incorrect answers' do
           it 'set review date +12 hours from now' do
             3.times { card.check_answer(card.translated_text) }
-            expect(card.review_date).to eq (Time.now + 12.hours).to_date
+            expect(card.review_date).to eq (Time.zone.now + 12.hours).to_date
           end
         end
       end
@@ -84,28 +84,28 @@ require 'rails_helper'
       context 'when gives 3 times correct answer' do
         it 'set review date +1 week from now' do
           3.times { card.check_answer(card.original_text) }
-          expect(card.review_date).to eq (Time.now + 1.week).to_date
+          expect(card.review_date).to eq (Time.zone.now + 1.week).to_date
         end
       end
 
       context 'when gives 4 times correct answer' do
         it 'set review date +2 weeks from now' do
           4.times { card.check_answer(card.original_text) }
-          expect(card.review_date).to eq (Time.now + 2.week).to_date
+          expect(card.review_date).to eq (Time.zone.now + 2.week).to_date
         end
       end
 
       context 'when gives 5 times correct answer' do
         it 'set review date +1 month from now' do
           5.times { card.check_answer(card.original_text) }
-          expect(card.review_date).to eq (Time.now + 1.month).to_date
+          expect(card.review_date).to eq (Time.zone.now + 1.month).to_date
         end
       end
     end
 
     context '#add_review_date' do
       it 'equals date today' do
-        expect(card.review_date).to eq(Date.today)
+        expect(card.review_date).to eq (Time.zone.now).to_date
       end
     end
   end

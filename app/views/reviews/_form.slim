@@ -3,8 +3,8 @@
     div = image_tag card.image.normal
     div = card.translated_text
     = hidden_field_tag 'card_id', card.id
-    = label_tag(:answer, 'Введите перевод')
+    = label_tag(:answer, t('review.enter_translate'))
     = text_field_tag(:answer)
-    = submit_tag('Подтвердить')
+    = submit_tag(t('button.confirm'))
 - else
-    div = 'Все карточки пересмотрены'
+    div = t('review.done')

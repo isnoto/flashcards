@@ -1,0 +1,27 @@
+ru:
+  simple_form:
+    labels:
+      card:
+        original_text: "Оригинал"
+        translated_text: "Перевод"
+        deck_name: "Имя колоды"
+        image: "Изображение"
+      deck:
+        name: "Имя колоды"
+      user:
+        name: "Имя"
+        email: "E-mail"
+        locale: "Язык"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+  helpers:
+    submit:
+      card:
+        create: "Создать карточку"
+        update: "Обновить"
+      deck:
+        create: "Создать колоду"
+        update: "Обновить"
+      user:
+        create: "Зарегистрироваться"
+        update: "Обновить данные"

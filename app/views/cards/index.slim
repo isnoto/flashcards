@@ -1,4 +1,4 @@
-div = link_to 'Добавить карточку', new_card_path
+div = link_to t('link.add_card'), new_card_path
 
 ul class="cards clearfix"
   - counter = 0
@@ -6,16 +6,16 @@ ul class="cards clearfix"
 
     li class="bs-callout bs-callout-primary"
       div class="cards__info-wrapper"
-        h4 Карточка # #{ counter += 1 }
+        h4 #{ t('card.name') } # #{ counter += 1 }
 
         div class="cards__info"
           div = image_tag card.image.thumb
-          div Оригинал: #{ card.original_text }
-          div Перевод:  #{ card.translated_text }
-          div Дата пересмотра: #{ card.review_date.strftime("%d/%m/%Y") }
-          div Колода: #{ card.deck.name }
+          div #{ t('card.original_text') }: #{ card.original_text }
+          div #{ t('card.translated_text') }:  #{ card.translated_text }
+          div #{ t('card.review_date') }: #{ card.review_date.strftime("%d/%m/%Y") }
+          div #{ t('card.deck_name') }: #{ card.deck.name }
 
       div class="cards__buttons btn-group"
-        = link_to 'Редактировать', edit_card_path(card), class: 'btn btn-success'
-        = link_to 'Удалить', card_path(card), method: :delete, class: 'btn btn-danger'
+        = link_to t('button.edit'), edit_card_path(card), class: 'btn btn-success'
+        = link_to t('button.delete'), card_path(card), method: :delete, class: 'btn btn-danger'
 

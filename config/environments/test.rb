@@ -41,4 +41,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :test
+  config.i18n.default_locale = :ru
 end

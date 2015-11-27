@@ -3,7 +3,7 @@ def login(email)
   click_link 'Войти'
   fill_in :email, with: email
   fill_in :password, with: 12345
-  click_button 'Log In'
+  click_button 'Войти'
 end
 
 def card_fill_in
@@ -19,7 +19,7 @@ end
 def create_card
   visit_create_card_path
   card_fill_in
-  select deck.name, from: 'Deck'
+  select deck.name, from: 'Имя колоды'
   click_button 'Создать'
 end
 
@@ -28,5 +28,5 @@ def register_user
   fill_in :user_email, with: 'email@gmail.com'
   fill_in :user_password, with: 'password'
   fill_in :user_password_confirmation, with: 'password'
-  click_button 'Регистрация'
+  click_button 'Зарегистрироваться'
 end

@@ -1,11 +1,11 @@
 div class="social-buttons clearfix"
   div = link_to auth_at_provider_path(provider: :facebook), class: "pull-left social-buttons__item btn btn-social btn-facebook"
     span class="fa fa-facebook"
-    | Sign in with Facebook
+    | #{ t('button.sign_in_fb') }
 
   div = link_to auth_at_provider_path(provider: :twitter), class: "pull-right social-buttons__item btn btn-social btn-twitter"
     span class="fa fa-twitter"
-    | Sign in with Twitter
+    | #{ t('button.sign_in_tw') }
 
 div class="omb_login"
   div class="row omb_row-sm-offset-3 omb_loginOr"
@@ -22,4 +22,4 @@ div class="omb_login"
     = label_tag :password
     = password_field_tag :password, nil, class: 'form-control'
 
-  = submit_tag 'Log In', class: 'btn btn--width btn-lg btn-primary'
+  = submit_tag t('button.log_in'), class: 'btn btn--width btn-lg btn-primary'

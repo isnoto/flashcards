@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   belongs_to :current_deck, class_name: Deck
 
+  before_create :set_locale
+
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
@@ -18,20 +20,17 @@ class User < ActiveRecord::Base
             confirmation: true, if: :password
   validates :password_confirmation, presence: true,
             if: :password
-  validates :name, uniqueness: true,
-            presence: true
+  validates :name, presence: true
   validates :email, uniqueness: true,
             presence: true,
             format: { with: EMAIL_REGEX },
             if: :email
 
   def random_card
-    user = User.find(self.id)
-
-    if user.current_deck
-      user.current_deck.cards.random_for_review.first
+    if current_deck
+      current_deck.cards.random_for_review.first
     else
-      user.cards.random_for_review.first
+      cards.random_for_review.first
     end
   end
 
@@ -43,5 +42,13 @@ class User < ActiveRecord::Base
 
   def self.pending_cards
     User.joins(:cards).where.not(email: nil).merge(Card.for_review).uniq
+  end
+
+  def set_locale
+    self.locale = I18n.locale
+  end
+
+  def available_locales
+    I18n.available_locales.map(&:to_s)
   end
 end

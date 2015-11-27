@@ -17,7 +17,7 @@ describe 'User authorization' do
         create_card
         click_link 'Редактировать'
         fill_in :card_original_text, with: 'Another word'
-        click_button 'Создать'
+        click_button 'Обновить'
         expect(page).to have_content('Карточка успешно отредактирована!')
       end
 
@@ -69,7 +69,7 @@ describe 'User authentication' do
 
   it 'not allows to create user with wrong data' do
     visit sign_up_path
-    click_button 'Регистрация'
+    click_button 'Зарегистрироваться'
     expect(page).to have_content('Заполните все поля!')
   end
 
@@ -79,6 +79,6 @@ describe 'User authentication' do
     click_link 'Выйти'
     visit sign_up_path
     register_user
-    expect(page).to have_content('has already been taken')
+    expect(page).to have_content('Данный E-mail уже зарегистрирован в системе')
   end
 end

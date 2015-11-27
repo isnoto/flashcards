@@ -17,7 +17,7 @@ describe 'Deck' do
       click_link 'Все колоды'
       click_link 'Добавить колоду'
       fill_in :deck_name, with: 'Тест'
-      click_button 'Создать'
+      click_button 'Создать колоду'
       expect(page).to have_content('Колода создана')
     end
   end
