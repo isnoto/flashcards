@@ -8,7 +8,7 @@ class SuperMemo
     @comparison_result = compare_words(prepare_word(original_text), prepare_word(answer))
     @original_text = original_text
     @quality = get_quality(time)
-    @repetitions_number = repetitions_number
+    @repetitions_number = repetitions_number + 1
     @interval = interval
   end
 
@@ -26,7 +26,7 @@ class SuperMemo
       comparison_result: @comparison_result,
       review_date: Time.zone.now + interval.days,
       e_factor: update_e_factor,
-      repetitions_number: @repetitions_number + 1
+      repetitions_number: @repetitions_number
     }
   end
 
