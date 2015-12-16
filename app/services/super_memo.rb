@@ -37,7 +37,7 @@ class SuperMemo
     when 1 then 1
     when 2 then 6
     else
-     (@interval * @e_factor).round
+      (@interval * @e_factor).round
     end
   end
 

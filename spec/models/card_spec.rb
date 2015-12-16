@@ -4,12 +4,10 @@ describe Card do
   let!(:user) { create(:user) }
   let!(:deck) { create(:deck, user_id: user.id) }
   let!(:card) { create(:card, deck_id: deck.id) }
-  let!(:wrong_card) { Card.create(original_text: 'Привет',
-                                 translated_text: 'ПривЕТ') }
+  let!(:wrong_card) { Card.create(original_text: 'Привет', ranslated_text: 'ПривЕТ') }
   let(:review_time) { 5_000 }
 
   context '#words_cannot_be_equal' do
-
     it 'does not pass the same words' do
       expect(wrong_card).not_to be_valid
     end

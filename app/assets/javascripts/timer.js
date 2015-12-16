@@ -26,7 +26,7 @@ function initReviewTimer() {
   submitButton.addEventListener('click', function() {
     timer.stop();
     timeInput.value = timer.getTime();
-  })
+  });
 }
 
 window.onload = function() {
