@@ -16,18 +16,12 @@ class Card < ActiveRecord::Base
   scope :for_review,        -> { where('review_date <= ?', Time.zone.now) }
   scope :random_for_review, -> { for_review.offset(rand(for_review.count)) }
 
-  INTERVALS = [12.hours, 3.days, 1.week, 2.weeks]
+  def check_answer(answer, time)
+    result = SuperMemo.new(e_factor, answer, original_text, repetitions_number,
+                           time, interval).calculate_interval
+    update(result.except(:comparison_result))
 
-  def check_answer(answer)
-    result = prepare_word(answer) == prepare_word(original_text)
-
-    if result
-      set_review_interval_correct_answers
-    elsif number_of_typos(answer) <= 2
-      :typo_in_word
-    else
-      set_review_interval_wrong_answers ? :wrong_answers_streak : :wrong_answer
-    end
+    result[:comparison_result]
   end
 
   def self.create_card_in_deck(user, params)
@@ -57,27 +51,5 @@ class Card < ActiveRecord::Base
     deck = user.decks.find_by(name: deck_name)
 
     deck || user.decks.create(name: deck_name)
-  end
-
-  def set_review_interval_correct_answers
-    interval = INTERVALS[correct_answers] || 1.month
-
-    update_attributes(review_date: Time.zone.now + interval,
-                      correct_answers: correct_answers + 1, incorrect_answers: 0)
-
-    :correct_answer
-  end
-
-  def set_review_interval_wrong_answers
-    increment!(:incorrect_answers)
-
-    if incorrect_answers == 3
-      update_attributes(review_date: Time.zone.now + 12.hours,
-                        correct_answers: 0, incorrect_answers: 0)
-    end
-  end
-
-  def number_of_typos(answer)
-    DamerauLevenshtein.distance(original_text, answer, 0)
   end
 end

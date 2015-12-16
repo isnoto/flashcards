@@ -7,8 +7,9 @@ class ReviewsController < ApplicationController
 
   def create
     @card = Card.find(review_params[:card_id])
+    result = @card.check_answer(review_params[:answer], params[:time])
 
-    case @card.check_answer(review_params[:answer])
+    case result
     when :correct_answer
       redirect_to root_path, notice: t('flash.review_correct_answer')
     when :typo_in_word
@@ -18,9 +19,6 @@ class ReviewsController < ApplicationController
       render :show
     when :wrong_answer
       redirect_to root_path, alert: t('flash.review_wrong_answer')
-    when :wrong_answers_streak
-      flash[:alert] = t('flash.review_streak_wrong_answers')
-      redirect_to root_path
     end
   end
 
@@ -28,6 +26,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.permit(:card_id, :answer)
+    params.permit(:card_id, :answer, :time)
   end
 end
