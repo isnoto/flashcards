@@ -25,7 +25,7 @@ class SuperMemo
       interval: interval,
       comparison_result: @comparison_result,
       review_date: Time.zone.now + interval.days,
-      e_factor: update_e_factor,
+      e_factor: e_factor,
       repetitions_number: @repetitions_number
     }
   end
@@ -41,10 +41,10 @@ class SuperMemo
     end
   end
 
-  def update_e_factor
+  def e_factor
     @e_factor += 0.1 - (5 - @quality) * (0.08 + (5 - @quality) * 0.02)
 
-    @e_factor < 1.3 ? @e_factor = 1.3 : @e_factor
+    [1.3, @e_factor].max
   end
 
   def reset_repetitions_number
