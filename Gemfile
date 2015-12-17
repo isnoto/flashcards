@@ -22,6 +22,8 @@ gem 'font-awesome-rails'
 gem 'damerau-levenshtein'
 gem 'whenever', require: false
 gem 'http_accept_language'
+gem 'rollbar', '~> 2.5.0'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'rails_12factor'
