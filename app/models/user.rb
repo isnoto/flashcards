@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :authentications
 
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  EMAIL_REGEXP = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   validates :password,
             length: { minimum: 3 },
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, uniqueness: true,
             presence: true,
-            format: { with: EMAIL_REGEX },
+            format: { with: EMAIL_REGEXP },
             if: :email
 
   def random_card
