@@ -30,7 +30,7 @@ Review.prototype.checkAnswer = function(e) {
 
     ctx.appendFlash(flashType, flashMessage);
     ctx.getCard();
-  }, 'json')
+  }, 'json');
 };
 
 Review.prototype.getCard = function() {
@@ -57,7 +57,7 @@ Review.prototype.getCard = function() {
       contentBlock.removeChild(ctx.form);
       contentBlock.appendChild(div);
     }
-  })
+  });
 };
 
 Review.prototype.appendImage = function(src) {
@@ -102,5 +102,5 @@ Review.prototype.appendFlash = function(type, message) {
 Review.prototype.removeFlash = function(timeout) {
   this.timeout = setTimeout(function(){
     $('.flash').fadeOut(300, function(){ $(this).remove();});
-  }, timeout)
+  }, timeout);
 };
