@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-describe 'Reviewing card' do
+describe 'Reviewing card', js: true do
   let!(:user) { create(:user) }
   let!(:deck) { create(:deck, user_id: user.id) }
 
   before do
-    puts login(user.email)
+    Capybara.current_session.driver.headers = { 'Accept-Language' => 'ru' }
+    login(user.email)
   end
 
   context 'When there are cards for review' do
@@ -20,7 +21,7 @@ describe 'Reviewing card' do
       expect(page).to have_content(subject.translated_text)
     end
 
-    context 'and submit correct answer', js: true do
+    context 'and submit correct answer' do
       it 'shows success message' do
         visit root_path
         fill_in :answer, with: subject.original_text
@@ -29,7 +30,7 @@ describe 'Reviewing card' do
       end
     end
 
-    context 'and submit wrong answer', js: true do
+    context 'and submit wrong answer' do
       it 'shows error message' do
         visit root_path
         fill_in :answer, with: 'wrong'
