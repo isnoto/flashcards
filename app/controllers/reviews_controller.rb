@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = t('flash.review_correct_answer')
     when :typo_in_word
       flash[:remind] = t('flash.review_hint',
-                         your_word:review_params[:answer],
+                         your_word: review_params[:answer],
                          expected_word: @card.original_text)
     when :wrong_answer
       flash[:alert] = t('flash.review_wrong_answer')
