@@ -1,24 +1,38 @@
 class ReviewsController < ApplicationController
   before_action :require_login
+  after_action { flash.discard if request.xhr? }
 
   def show
     @card = current_user.random_card
+
+    respond_to do |format|
+      if @card
+        format.json { render json: @card }
+      else
+        format.json { render json: { review_done: t('review.done') } }
+      end
+
+      format.html
+    end
   end
 
   def create
     @card = Card.find(review_params[:card_id])
-    result = @card.check_answer(review_params[:answer], params[:time])
+    review_result = @card.check_answer(review_params[:answer], params[:time])
 
-    case result
+    case review_result
     when :correct_answer
-      redirect_to root_path, notice: t('flash.review_correct_answer')
+      flash[:notice] = t('flash.review_correct_answer')
     when :typo_in_word
-      flash.now[:remind] = t('flash.review_hint',
-                             your_word:review_params[:answer],
-                             expected_word: @card.original_text)
-      render :show
+      flash[:remind] = t('flash.review_hint',
+                         your_word:review_params[:answer],
+                         expected_word: @card.original_text)
     when :wrong_answer
-      redirect_to root_path, alert: t('flash.review_wrong_answer')
+      flash[:alert] = t('flash.review_wrong_answer')
+    end
+
+    respond_to do |format|
+      format.json { render json: { message: flash.to_h } }
     end
   end
 
