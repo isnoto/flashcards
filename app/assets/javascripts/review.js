@@ -18,43 +18,43 @@ Review.prototype.init = function() {
 };
 
 Review.prototype.checkAnswer = function(e) {
-  var ctx = this;
+  var self = this;
 
   e.preventDefault();
-  ctx.timer.stop();
-  ctx.timeInput.value = ctx.timer.getTime();
+  self.timer.stop();
+  self.timeInput.value = self.timer.getTime();
 
   $.post('/reviews', $('#' + this.formId ).serialize(), function( data ) {
     var flashType = Object.keys(data.message)[0];
     var flashMessage = data.message[flashType];
 
-    ctx.appendFlash(flashType, flashMessage);
-    ctx.getCard();
+    self.appendFlash(flashType, flashMessage);
+    self.getCard();
   }, 'json');
 };
 
 Review.prototype.getCard = function() {
-  var ctx = this;
+  var self = this;
 
   $.getJSON('/reviews', function(card) {
     if (card.id) {
       var imageSrc = card.image.normal.url;
 
       if (imageSrc) {
-        ctx.appendImage(imageSrc);
+        self.appendImage(imageSrc);
       } else {
-        ctx.removeImage();
+        self.removeImage();
       }
 
-      ctx.cardIdInput.value = card.id;
-      ctx.translateField.innerHTML = card.translated_text;
-      ctx.timer.start();
+      self.cardIdInput.value = card.id;
+      self.translateField.innerHTML = card.translated_text;
+      self.timer.start();
     } else {
       var div = document.createElement('div');
-      var contentBlock = ctx.form.parentNode;
+      var contentBlock = self.form.parentNode;
 
       div.innerHTML = card.review_done;
-      contentBlock.removeChild(ctx.form);
+      contentBlock.removeChild(self.form);
       contentBlock.appendChild(div);
     }
   });
