@@ -5,7 +5,7 @@ describe 'Reviewing card' do
   let!(:deck) { create(:deck, user_id: user.id) }
 
   before do
-    login(user.email)
+    puts login(user.email)
   end
 
   context 'When there are cards for review' do
