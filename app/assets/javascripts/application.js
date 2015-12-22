@@ -18,7 +18,7 @@
 
 window.onload = function() {
   if (document.getElementById('review-form')) {
-    var review = new Review({
+    new Review({
       form: 'review-form',
       timeInput: 'review-time',
       submitButton: 'input[type="submit"]'
