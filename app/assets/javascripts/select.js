@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function select2() {
   $("#card_deck_name").select2({
     theme: "bootstrap",
     width: '100%',
@@ -12,4 +12,4 @@ $(document).ready(function() {
       }
     }
   });
-});
+};

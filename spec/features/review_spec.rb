@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-describe 'Reviewing card' do
+describe 'Reviewing card', js: true do
   let!(:user) { create(:user) }
   let!(:deck) { create(:deck, user_id: user.id) }
 
   before do
+    Capybara.current_session.driver.headers = { 'Accept-Language' => 'ru' }
     login(user.email)
   end
 

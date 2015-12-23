@@ -15,3 +15,16 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require_tree .
+
+window.onload = function() {
+  if (document.getElementById('review-form')) {
+    new Review({
+      form: 'review-form',
+      timeInput: 'review-time',
+      submitButton: 'input[type="submit"]'
+    });
+  } else {
+    select2();
+    insertCurrentDeckAtTheTop();
+  }
+};

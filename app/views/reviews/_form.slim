@@ -1,7 +1,9 @@
 - if card
-  = form_tag reviews_path, id: 'review-form' do
-    div = image_tag card.image.normal
-    div = card.translated_text
+  = form_tag reviews_path, remote: true, id: 'review-form' do
+    div.card__image
+      - if card.image.file
+        = image_tag card.image.normal
+    div.card__translate = card.translated_text
     = hidden_field_tag 'card_id', card.id
     = hidden_field_tag('time', 0, id: 'review-time')
     = label_tag(:answer, t('review.enter_translate'))

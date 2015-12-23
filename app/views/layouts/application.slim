@@ -32,9 +32,10 @@ html
               = link_to t('link.log_in'), log_in_path
 
 
-      section
-        - if flash.any?
-          = render 'shared/flash'
+      section#content
+        div.flash-container
+          - if flash.any?
+            = render 'shared/flash'
         = yield
 
       = render 'shared/footer'
