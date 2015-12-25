@@ -24,7 +24,7 @@ Review.prototype.checkAnswer = function(e) {
   self.timer.stop();
   self.timeInput.value = self.timer.getTime();
 
-  $.post('/reviews', $('#' + this.formId ).serialize(), function( data ) {
+  $.post('/dashboard/reviews', $('#' + this.formId ).serialize(), function( data ) {
     var flashType = Object.keys(data.message)[0];
     var flashMessage = data.message[flashType];
 
@@ -36,7 +36,7 @@ Review.prototype.checkAnswer = function(e) {
 Review.prototype.getCard = function() {
   var self = this;
 
-  $.getJSON('/reviews', function(card) {
+  $.getJSON('/dashboard/reviews', function(card) {
     if (card.id) {
       var imageSrc = card.image.normal.url;
 

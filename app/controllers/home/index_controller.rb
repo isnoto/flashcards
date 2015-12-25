@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class Home::IndexController < ApplicationController
   def index
     if current_user
       redirect_to reviews_path

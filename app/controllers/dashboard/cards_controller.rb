@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class Dashboard::CardsController < ApplicationController
   before_action :require_login
   before_action :find_card, only: [:edit, :update, :destroy]
 

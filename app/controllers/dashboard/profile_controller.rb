@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class Dashboard::ProfileController < ApplicationController
   before_action :require_login
 
   def edit
