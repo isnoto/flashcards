@@ -26,6 +26,7 @@ gem 'whenever', require: false
 gem 'http_accept_language'
 gem 'rollbar', '~> 2.5.0'
 gem 'newrelic_rpm'
+gem 'dotenv-rails'
 
 group :production do
   gem 'rails_12factor'
@@ -34,7 +35,6 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'dotenv-rails'
 end
 
 group :development do
