@@ -1,7 +1,8 @@
 lock '3.4.0'
 
+set :log_level, :debug
 set :application, 'flashcards'
-set :branch,      'twentieth-task'
+set :branch, ENV['BRANCH_NAME'] || 'master'
 set :repo_url, 'git@github.com:isnoto/flashcards.git'
 set :deploy_to, '/home/deploy/flashcards'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', '.env')
