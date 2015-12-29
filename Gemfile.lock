@@ -41,6 +41,9 @@ GEM
     autoprefixer-rails (6.1.0.1)
       execjs
       json
+    aws-sdk-v1 (1.66.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -49,6 +52,24 @@ GEM
       sass (>= 3.3.0)
     builder (3.2.2)
     byebug (6.0.2)
+    cap-ec2 (1.0.0)
+      aws-sdk-v1
+      capistrano (>= 3.0)
+      colorize
+      terminal-table
+    capistrano (3.4.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.5)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capybara (2.5.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -70,6 +91,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     damerau-levenshtein (1.1.0)
       bundler (~> 1.7)
       json (~> 1.8)
@@ -221,12 +243,14 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.2)
+    libv8 (3.16.14.11)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.6.2)
+    mini_magick (4.3.6)
     mini_portile (0.6.2)
     minitest (5.8.2)
     multi_json (1.11.2)
@@ -295,7 +319,7 @@ GEM
     rake-compiler (0.9.5)
       rake
     rdoc (4.2.0)
-    rmagick (2.15.4)
+    ref (2.0.0)
     rollbar (2.5.2)
       multi_json
     rspec-core (3.3.2)
@@ -351,7 +375,14 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.8.1)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     temple (0.7.6)
+    terminal-table (1.5.2)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -380,6 +411,11 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  cap-ec2
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rvm
   capybara
   carrierwave
   coffee-rails (~> 4.1.0)
@@ -392,6 +428,7 @@ DEPENDENCIES
   http_accept_language
   jbuilder (~> 2.0)
   jquery-rails
+  mini_magick
   newrelic_rpm
   nokogiri
   pg (~> 0.18.3)
@@ -400,7 +437,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.2.4)
   rails_12factor
-  rmagick
   rollbar (~> 2.5.0)
   rspec-rails
   sass-rails (~> 5.0)
@@ -410,6 +446,7 @@ DEPENDENCIES
   slim-rails
   sorcery
   spring
+  therubyracer
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   whenever

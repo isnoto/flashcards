@@ -1,4 +1,4 @@
-class ReviewsController < ApplicationController
+class Dashboard::ReviewsController < ApplicationController
   before_action :require_login
   after_action { flash.discard if request.xhr? }
 
