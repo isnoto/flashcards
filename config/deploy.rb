@@ -1,5 +1,6 @@
 lock '3.4.0'
 
+set :ec2_config, 'config/ec2.yml'
 set :log_level, :debug
 set :application, 'flashcards'
 set :branch, ENV['BRANCH_NAME'] || 'master'
