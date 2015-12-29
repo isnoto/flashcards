@@ -16,4 +16,3 @@ ec2_role :app,
          ssh_options: ssh_config
 
 set :rails_env, :production
-
