@@ -45,7 +45,7 @@ en:
     deck_empty: "You have no decks. Create new one."
     review_hint: "You wrote %{your_word}. Perhaps you meant the word %{expected_word}"
     review_correct_answer: "Correct"
-    review_wrong_answer: "Your answer is wrong"
+    review_wrong_answer: "%{answer} answer is wrong. Correct %{original}"
     review_streak_wrong_answers: "You have entered three times wrong! The next date of revision cards in 12 hours."
     log_out: "See you!"
     log_in: "Welcome!"
