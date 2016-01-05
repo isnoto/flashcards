@@ -44,7 +44,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
-  gem 'cap-ec2'
+  gem 'cap-ec2', require: false
 end
 
 group :test do
