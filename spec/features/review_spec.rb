@@ -35,7 +35,7 @@ describe 'Reviewing card', js: true do
         visit root_path
         fill_in :answer, with: 'wrong'
         click_button 'Подтвердить'
-        expect(page).to have_content('Ваш ответ не правильный')
+        expect(page).to have_content('wrong ответ не правильный. Верный ответ Hello')
       end
     end
   end
