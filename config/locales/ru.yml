@@ -45,7 +45,7 @@ ru:
     deck_empty: "У вас пока нет колод. Создайте новую!"
     review_hint: "Вы ввели слово %{your_word}. Возможно вы имели ввиду слово %{expected_word}"
     review_correct_answer: "Верно!"
-    review_wrong_answer: "Ваш ответ не правильный"
+    review_wrong_answer: "%{answer} ответ не правильный. Верный ответ %{original}"
     review_streak_wrong_answers: "Вы ввели три раза не правильно! Сделующая дата пересмотра карточки через 12 часов."
     log_out: "До скорой встречи!"
     log_in: "Добро пожаловать!"

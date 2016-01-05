@@ -28,7 +28,9 @@ class Dashboard::ReviewsController < ApplicationController
                          your_word: review_params[:answer],
                          expected_word: @card.original_text)
     when :wrong_answer
-      flash[:alert] = t('flash.review_wrong_answer')
+      flash[:alert] = t('flash.review_wrong_answer',
+                        answer: review_params[:answer],
+                        original: @card.original_text)
     end
 
     respond_to do |format|
